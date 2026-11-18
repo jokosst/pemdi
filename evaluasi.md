@@ -1,21 +1,21 @@
-# LAPORAN ANALISIS AWAL FGD PERTAMA & EVALUASI PAKAR (*DESK EVALUATION*) KEMATANGAN PEMERINTAHAN DIGITAL KABUPATEN LANDAK TAHUN 2026
+# LAPORAN ANALISIS AWAL FGD PERTAMA & EVALUASI PAKAR (*DESK EVALUATION*) KEMATANGAN PEMERINTAHAN DIGITAL KABUPATEN TAHUN 2026
 
-**Disusun oleh:** Tenaga Ahli / Pakar Arsitektur Pemerintahan Digital (PEMDI / SPBE) Kabupaten Landak  
+**Disusun oleh:** Tenaga Ahli / Pakar Arsitektur Pemerintahan Digital (PEMDI / SPBE) Kabupaten  
 **Basis Data:** Hasil Kuesioner FGD Pertama (32 Entri $\rightarrow$ 31 Unit Kerja Unik), Panduan Teknis Evaluasi Kuesioner Versi 2 (Bobot Tertimbang Level 1–4), Laporan Hasil Asistensi SPBE Diskominfo 2026, dan Laporan Asesmen Kesiapan Digital KOMDIGI 2026.
 
 ---
 
 ## 1. Pengantar Pakar & Kurasi Daftar 31 Responden FGD Pertama
 
-Pada pelaksanaan *Focus Group Discussion* (FGD) Pertama pemetaan Pemerintahan Digital (PEMDI/SPBE) Kabupaten Landak, telah terkumpul **32 baris isian kuesioner mandiri (*self-assessment*)** dari perangkat daerah. Sebagai langkah pertama analisis pakar, dilakukan **kurasi dan pembersihan entri responden (*data cleansing*)** sesuai struktur organisasi dan kualitas keterwakilan data sebagai berikut:
+Pada pelaksanaan *Focus Group Discussion* (FGD) Pertama pemetaan Pemerintahan Digital (PEMDI/SPBE) Kabupaten, telah terkumpul **32 baris isian kuesioner mandiri (*self-assessment*)** dari perangkat daerah. Sebagai langkah pertama analisis pakar, dilakukan **kurasi dan pembersihan entri responden (*data cleansing*)** sesuai struktur organisasi dan kualitas keterwakilan data sebagai berikut:
 
 > [!IMPORTANT]
 > **Keputusan Kurasi 31 Unit Kerja Definitif pada FGD Pertama:**
 > 1. **Pemisahan Entitas Dinas Kesehatan & Puskesmas:**
->    * **Dinas Kesehatan, PPKB Kabupaten Landak** (Responden: *Marlinda, S.M* – Penata Layanan Operasional, Skor Mandiri: **2,57**) ditetapkan mewakili Dinas Kesehatan Induk.
+>    * **Dinas Kesehatan, PPKB Kabupaten** (Responden: *Marlinda, S.M* – Penata Layanan Operasional, Skor Mandiri: **2,57**) ditetapkan mewakili Dinas Kesehatan Induk.
 >    * **Dinas Kesehatan / Puskesmas Ngabang** (Responden: *Eliskawati* – Perawat Penyelia / Kasubag TU, Skor Mandiri: **2,85**) ditetapkan sebagai entitas layanan fasilitas kesehatan tersendiri (UPTD Puskesmas Ngabang).
 > 2. **Pengambilan Data Terbaik untuk Sekretariat Daerah:**
->    * Terdapat 2 entri dari Sekretariat Daerah, yaitu **Sekretariat Daerah Kabupaten Landak** (*Devi Kartika Sari* – Skor Mandiri: **2,83**) dan **Sekretariat Daerah Bagian PBJ** (*Kurnia Witri Siregar* – Skor Mandiri: **1,90**). Sesuai kaidah keterwakilan instansi induk, diambil data terbaik (**Skor 2,83**) untuk mewakili **Sekretariat Daerah Kabupaten Landak**.
+>    * Terdapat 2 entri dari Sekretariat Daerah, yaitu **Sekretariat Daerah Kabupaten** (*Devi Kartika Sari* – Skor Mandiri: **2,83**) dan **Sekretariat Daerah Bagian PBJ** (*Kurnia Witri Siregar* – Skor Mandiri: **1,90**). Sesuai kaidah keterwakilan instansi induk, diambil data terbaik (**Skor 2,83**) untuk mewakili **Sekretariat Daerah Kabupaten**.
 > 3. **Penambahan Responden Baru (Unit Kerja ke-31):**
 >    * **Rumah Sakit Pratama** (Responden: *Riovanus Astianto Gae, S.Kom.* – Pranata Komputer, pengisian `2026-11-03`, Skor Mandiri: **2,44**) resmi dimasukkan sebagai responden ke-31.
 
@@ -44,11 +44,11 @@ Pada data Excel FGD Pertama, kolom **`Upload Bukti Dukung (Evidence)` masih koso
 | Domain SPBE | Aturan Koreksi Skor Evaluator (Bab 6 Panduan Teknis V2) | Fakta Silang Asistensi Diskominfo & Asesmen KOMDIGI 2026 |
 | :--- | :--- | :--- |
 | **1. Proses Bisnis** | Jika belum melampirkan Dokumen Peta Proses Bisnis (BPMN/SIPOC) & SK Kepala OPD, skor dikoreksi **maksimal ke Level 2,00**. | Skor Probis Lintas-OPD KOMDIGI = **0,00**. Namun penggunaan *SRIKANDI*, *e-Kinerja*, & *SIM-TPP* terbukti aktif di lapangan (diakui s.d. Level 3,00). |
-| **2. Data & Informasi** | Jika data tidak aktif terhubung ke Portal Satu Data Landak / SITUASI beserta kamus data/metadata, skor **maksimal Level 2,00**. | Perbup Satu Data No. 54/2020 & portal *SITUASI* sudah berjalan (**Skor KOMDIGI 1,50**), namun SK Produsen Data & Katalog Data di internal OPD sebagian besar belum disahkan. |
+| **2. Data & Informasi** | Jika data tidak aktif terhubung ke Portal Satu Data / SITUASI beserta kamus data/metadata, skor **maksimal Level 2,00**. | Perbup Satu Data No. 54/2020 & portal *SITUASI* sudah berjalan (**Skor KOMDIGI 1,50**), namun SK Produsen Data & Katalog Data di internal OPD sebagian besar belum disahkan. |
 | **3. Layanan** | Jika layanan belum *end-to-end* online dan belum punya SK SLA resmi, skor **maksimal Level 2,00** (kecuali OPD yang terbukti memiliki layanan online di Laporan Asistensi). | Dari 196 layanan, **155 layanan (79,1%) masih offline**. Hanya 17 OPD yang terbukti memiliki aplikasi layanan online aktif. |
 | **4. Aplikasi** | Jika tidak ada Surat Rekomendasi (*Clearance*) Diskominfo, BAST *Source Code*, & Repositori, skor aplikasi khusus **maksimal Level 2,00**. | Siklus hidup aplikasi & API Gateway pada Asesmen KOMDIGI = **0,00**. Sebanyak 73,3% OPD mengakui tidak punya API & tidak punya SSO. |
 | **5. Infrastruktur** | Jika server masih fisik mandiri/vendor luar tanpa izin atau belum terhubung JIP, skor **maksimal Level 2,00**. | Asesmen KOMDIGI mencatat **JIP baru terhubung di 2 titik (Diskominfo & DPMPTSP)**, **0 sistem berada di PDN**, dan baru **6 OPD yang memakai Router Mikrotik**. |
-| **6. Keamanan Informasi** | Jika tidak ada laporan *PenTest/VA*, SOP Keamanan resmi, atau DRP tertulis, skor **maksimal Level 2,00**. | Asesmen KOMDIGI mencatat Keamanan Teknologi, Data, Aplikasi, & DRP = **0,00**, sedangkan Tim Tanggap Insiden (*LandakKab-CSIRT*) & TTE BSrE sudah berjalan baik. |
+| **6. Keamanan Informasi** | Jika tidak ada laporan *PenTest/VA*, SOP Keamanan resmi, atau DRP tertulis, skor **maksimal Level 2,00**. | Asesmen KOMDIGI mencatat Keamanan Teknologi, Data, Aplikasi, & DRP = **0,00**, sedangkan Tim Tanggap Insiden (Kab-CSIRT*) & TTE BSrE sudah berjalan baik. |
 
 ---
 
@@ -58,10 +58,10 @@ Sebelum dilakukan koreksi pakar, ditemukan **83 titik anomali klaim (*overclaim*
 
 1. **Anomali Klaim Penempatan Server di Pusat Data Nasional (PDN):**
    * **Temuan FGD 1:** **Dinas PUPRPERA** dan **Dinas Sosial P3A** menjawab **Opsi d (Level 4): *"Ditempatkan di Pusat Data Nasional (PDN) / Cloud Resmi Pemerintah"***.
-   * **Fakta Lapangan 2026:** Berdasarkan *Laporan Hasil Asistensi 2026 (Halaman 45)*, dari 50 Sistem Elektronik yang terdata di Kabupaten Landak, **jumlah sistem pada Server PDN adalah 0 sistem** (25 di Server Diskominfo, 23 di Pihak Ketiga, 2 di Lokal OPD).
+   * **Fakta Lapangan 2026:** Berdasarkan *Laporan Hasil Asistensi 2026 (Halaman 45)*, dari 50 Sistem Elektronik yang terdata di Kabupaten, **jumlah sistem pada Server PDN adalah 0 sistem** (25 di Server Diskominfo, 23 di Pihak Ketiga, 2 di Lokal OPD).
 2. **Anomali Klaim Penerapan *Secure by Design*, Audit BSSN, & *Penetration Testing*:**
    * **Temuan FGD 1:** **Dinas Perkebunan & Peternakan** menjawab **Opsi e (Level 5): *"Menerapkan standar Secure by Design hingga audit keamanan berkala oleh BSSN"***; **Dinas Kesehatan / Puskesmas Ngabang** menjawab **Opsi d (Level 4): *"Menjalani Penetration Testing resmi dan memiliki Surat Kelayakan Keamanan"***; dan **Sekretariat Daerah** menjawab **Opsi d (Level 4)** pada uji *Penetration Testing* berkala.
-   * **Fakta Lapangan 2026:** Asesmen KOMDIGI 2026 (Tabel 13) mencatat skor **Audit Keamanan Aplikasi = 0 (Belum Siap)** karena pengujian keamanan aplikasi belum pernah dilaksanakan secara operasional, dan website Setda (`setda.landakkab.go.id`) justru berstatus *Suspend*.
+   * **Fakta Lapangan 2026:** Asesmen KOMDIGI 2026 (Tabel 13) mencatat skor **Audit Keamanan Aplikasi = 0 (Belum Siap)** karena pengujian keamanan aplikasi belum pernah dilaksanakan secara operasional, dan website Setda (`setdakab.go.id`) justru berstatus *Suspend*.
 3. **Anomali Klaim Kontradiktif pada Pencadangan Data (*Backup*) & Keberadaan Aplikasi:**
    * **Temuan FGD 1:** **Satuan Polisi Pamong Praja** menjawab **Opsi e (Level 5): *"Pencadangan berjalan otomatis real-time, terenkripsi, dan diuji pemulihannya secara berkala"*** pada Pertanyaan D6.3, tetapi pada Pertanyaan D6.4 langsung di bawahnya menjawab **Opsi a (Level 1): *"Data cadangan disimpan di komputer/harddisk kerja yang sama"***. Selain itu, Satpol PP mengklaim **Level 4 (Layanan digital 24/7)** dan **Level 5 (*Once-Only* penuh)** padahal pada Domain Aplikasi menjawab **Opsi a: *"Belum memiliki aplikasi khusus"*** dan belum memiliki website profil.
 4. **Anomali Klaim Keterhubungan Otomatis via SPLP & API Aktif:**
@@ -74,7 +74,7 @@ Sebelum dilakukan koreksi pakar, ditemukan **83 titik anomali klaim (*overclaim*
 
 ---
 
-## 4. Ringkasan Eksekutif Skor Kematangan Kabupaten Landak (Mandiri vs Terkoreksi Pakar)
+## 4. Ringkasan Eksekutif Skor Kematangan Kabupaten (Mandiri vs Terkoreksi Pakar)
 
 Setelah dilakukan penghitungan terhadap **31 Perangkat Daerah / Unit Kerja** menggunakan rumus bobot tertimbang **Panduan Teknis Evaluasi Versi 2 (Skala 1,00 – 4,00)**, diperoleh perbandingan capaian tingkat kabupaten sebagai berikut:
 
@@ -99,7 +99,7 @@ xychart-beta
 
 > [!TIP]
 > **Kesimpulan Diagnostik Pakar:**
-> Secara klaim mandiri (*unverified*), terdapat **11 OPD** yang mengklaim sudah berada pada predikat **Cukup / Baik ($\ge 2,51$)**. Namun, setelah diterapkan **Aturan Verifikasi Bukti Dukung (Bab 6 Panduan Teknis V2)**, hanya **1 OPD yaitu Dinas Komunikasi dan Informatika (Skor Terkoreksi: 2,55)** yang bertahan pada predikat **Cukup (Berkembang)** berkat bukti faktual pengelolaan pusat data, JIP, portal Satu Data/SITUASI, dan LandakKab-CSIRT, diikuti oleh **Dinas Pendidikan (2,51)**. Sementara **26 OPD berada pada predikat Kurang (Awal/Rintisan: $1,76 - 2,50$)** dan **3 OPD berada pada predikat Sangat Kurang (Belum Siap: $< 1,76$)**.
+> Secara klaim mandiri (*unverified*), terdapat **11 OPD** yang mengklaim sudah berada pada predikat **Cukup / Baik ($\ge 2,51$)**. Namun, setelah diterapkan **Aturan Verifikasi Bukti Dukung (Bab 6 Panduan Teknis V2)**, hanya **1 OPD yaitu Dinas Komunikasi dan Informatika (Skor Terkoreksi: 2,55)** yang bertahan pada predikat **Cukup (Berkembang)** berkat bukti faktual pengelolaan pusat data, JIP, portal Satu Data/SITUASI, danKab-CSIRT, diikuti oleh **Dinas Pendidikan (2,51)**. Sementara **26 OPD berada pada predikat Kurang (Awal/Rintisan: $1,76 - 2,50$)** dan **3 OPD berada pada predikat Sangat Kurang (Belum Siap: $< 1,76$)**.
 
 ---
 
@@ -116,11 +116,11 @@ xychart-beta
 | **5** | **Inspektorat** | Zaki Sarjudin | 2,68 | 2,68 | 2,25 | 2,30 | 2,90 | 2,15 | 2,11 | 2,40 | **2,38** | $-0,31$ | Kurang (Awal / Rintisan) | 1 |
 | **6** | **Dinas Kesehatan / Puskesmas Ngabang** | Eliskawati | 2,85 | 2,84 | 2,35 | 2,30 | 2,60 | 2,10 | 2,10 | 2,35 | **2,31** | $-0,52$ | Kurang (Awal / Rintisan) | 4 |
 | **7** | **Dinas PUPR dan Perumahan Rakyat** | Yoelretno Putra K. | 2,78 | 2,78 | 2,35 | 2,20 | 2,60 | 2,25 | 2,10 | 2,20 | **2,29** | $-0,49$ | Kurang (Awal / Rintisan) | 5 |
-| **8** | **Sekretariat Daerah Kabupaten Landak** | Devi Kartika Sari | 2,83 | 2,79 | 2,55 | 2,00 | 2,60 | 2,15 | 2,10 | 2,25 | **2,28** | $-0,51$ | Kurang (Awal / Rintisan) | 5 |
+| **8** | **Sekretariat Daerah Kabupaten** | Devi Kartika Sari | 2,83 | 2,79 | 2,55 | 2,00 | 2,60 | 2,15 | 2,10 | 2,25 | **2,28** | $-0,51$ | Kurang (Awal / Rintisan) | 5 |
 | **9** | **Badan Keuangan dan Aset Daerah** | Christina Hutahaean | 2,73 | 2,68 | 2,55 | 2,30 | 2,70 | 1,55 | 2,00 | 2,00 | **2,21** | $-0,46$ | Kurang (Awal / Rintisan) | 5 |
-| **10** | **RSUD Landak** | Supriyatno, S.Kom. | 2,44 | 2,45 | 2,05 | 2,10 | 2,50 | 2,20 | 2,11 | 2,20 | **2,20** | $-0,25$ | Kurang (Awal / Rintisan) | 3 |
+| **10** | **RSUD** | Supriyatno, S.Kom. | 2,44 | 2,45 | 2,05 | 2,10 | 2,50 | 2,20 | 2,11 | 2,20 | **2,20** | $-0,25$ | Kurang (Awal / Rintisan) | 3 |
 | **11** | **BKPSDM** | Agnes Ega Mariska | 2,44 | 2,43 | 2,55 | 1,80 | 2,70 | 1,90 | 2,33 | 1,90 | **2,20** | $-0,22$ | Kurang (Awal / Rintisan) | 1 |
-| **12** | **Dinas Kesehatan, PPKB Kabupaten Landak** | Marlinda, S.M | 2,57 | 2,60 | 2,45 | 2,20 | 2,70 | 1,45 | 2,00 | 2,20 | **2,20** | $-0,40$ | Kurang (Awal / Rintisan) | 3 |
+| **12** | **Dinas Kesehatan, PPKB Kabupaten** | Marlinda, S.M | 2,57 | 2,60 | 2,45 | 2,20 | 2,70 | 1,45 | 2,00 | 2,20 | **2,20** | $-0,40$ | Kurang (Awal / Rintisan) | 3 |
 | **13** | **Badan Kesatuan Bangsa dan Politik** | Cavlin Ivan W. | 2,38 | 2,38 | 2,10 | 1,70 | 2,60 | 2,15 | 2,20 | 2,20 | **2,16** | $-0,22$ | Kurang (Awal / Rintisan) | 0 |
 | **14** | **Bappeda** | Yohanes Rahmad | 2,63 | 2,67 | 2,25 | 2,20 | 2,30 | 2,15 | 2,00 | 1,95 | **2,15** | $-0,52$ | Kurang (Awal / Rintisan) | 7 |
 | **15** | **Dinas Kependudukan dan Pencatatan Sipil** | Laudy Van Cliff M. | 2,66 | 2,68 | 2,40 | 2,20 | 2,50 | 1,60 | 2,22 | 1,80 | **2,14** | $-0,53$ | Kurang (Awal / Rintisan) | 7 |
@@ -150,7 +150,7 @@ Berdasarkan **Tahapan Operasional Evaluasi (Bab 7 Panduan Teknis V2)** dan strat
 ### 1. Menerbitkan Lembar Konfirmasi & Tagihan Bukti Dukung (*Pre-Populated Evidence Sheet*) ke 31 Unit Kerja
 Kita **tidak perlu lagi menyuruh OPD mengetik ulang** daftar aplikasi umum, jumlah titik internet, atau alamat website profil mereka karena data tersebut sudah lengkap di *Laporan Asistensi 2026*. Sebaliknya, untuk memulihkan skor mereka yang terkoreksi ke Level 2,00, setiap OPD diberi waktu pada FGD Kedua untuk menyerahkan **4 Dokumen Bukti Dukung Wajib**:
 1. **Bukti Domain 1 (Proses Bisnis):** Salinan PDF **SK Kepala OPD tentang Penetapan SOP / Peta Proses Bisnis** beserta nomor dokumennya (khusus bagi 26 OPD yang mengklaim sudah punya SOP/Probis).
-2. **Bukti Domain 2 (Data & Informasi):** Salinan **SK Tim Pengelola Data / Produsen Data OPD** dan daftar *Dataset Sektoral* yang telah diunggah ke portal **SITUASI (`situasi.landakkab.go.id`)**.
+2. **Bukti Domain 2 (Data & Informasi):** Salinan **SK Tim Pengelola Data / Produsen Data OPD** dan daftar *Dataset Sektoral* yang telah diunggah ke portal **SITUASI (`situasikab.go.id`)**.
 3. **Bukti Domain 3 & 4 (Layanan & Aplikasi):** Daftar volume pemohon/transaksi riil per tahun pada layanan utama, serta **Dokumentasi Teknis Aplikasi Khusus** (Bahasa Pemrograman, Database, lokasi server riil, dan status ketersediaan API) terutama bagi 11 OPD pengelola 41 aplikasi khusus daerah (termasuk *RS Pratama* yang baru mengklaim sudah punya API ke SPLP).
 4. **Bukti Domain 5 & 6 (Infrastruktur & Keamanan):** Salinan **SK Penunjukan Admin Website/Pengelola TIK** (untuk mengatasi 45,9% kekosongan admin), daftar pejabat pemegang **Sertifikat TTE BSrE aktif**, serta bukti prosedur *backup* database.
 
@@ -159,4 +159,4 @@ Kita **tidak perlu lagi menyuruh OPD mengetik ulang** daftar aplikasi umum, juml
 * **Temuan Penting pada RS Pratama:**
   * Belum memiliki petugas/SK pengelola data resmi (**Level 1**) dan belum memiliki kanal layanan digital/website khusus (**Level 1**), serta koneksi internet masih menggunakan langganan *broadband* rumahan yang sering terputus (**Level 2**).
   * Namun, RS Pratama mengklaim aplikasi khususnya telah memiliki **API yang terdaftar dan terhubung aktif dengan SPLP (Level 4)**—hal ini kemungkinan besar merujuk pada integrasi *SIMRS / e-klaim BPJS / SATUSEHAT Kemenkes*, sehingga perlu diverifikasi saat *Desk Evaluation* apakah sistem tersebut dikelola mandiri atau aplikasi umum Kementerian Kesehatan.
-* **Rekomendasi Arsitektur untuk RS Pratama:** Memasukkan **Rumah Sakit Pratama** ke dalam target perluasan **Jaringan Intra Pemerintah (JIP)** dan program **PASTI BAKTI**, membuatkan subdomain resmi `rspratama.landakkab.go.id` di Server Diskominfo, serta menyelaraskan arsitektur *SIMRS* dan rujukan berjenjangnya (*SISRUTE*) dengan Puskesmas dan RSUD Landak.
+* **Rekomendasi Arsitektur untuk RS Pratama:** Memasukkan **Rumah Sakit Pratama** ke dalam target perluasan **Jaringan Intra Pemerintah (JIP)** dan program **PASTI BAKTI**, membuatkan subdomain resmi `rspratamakab.go.id` di Server Diskominfo, serta menyelaraskan arsitektur *SIMRS* dan rujukan berjenjangnya (*SISRUTE*) dengan Puskesmas dan RSUD.
