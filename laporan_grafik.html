@@ -1,0 +1,3105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="dashboard">
+  <meta name="design-style" content="modern-govtech-bento">
+  <title>Evaluasi Indeks Kematangan SPBE Kabupaten Landak Tahun 2026 — Dashboard Eksekutif</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+  <script src="https://unpkg.com/lucide@1.43.0/dist/umd/lucide.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Modern GovTech Bento Surface & Ink */
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-subtle: #f1f5f9;
+      --surface-hover: #f8fafc;
+      --ink: #0f172a;
+      --ink-secondary: #475569;
+      --ink-muted: #64748b;
+
+      /* Borders & Dividers */
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+
+      /* Brand & Interactive Accents */
+      --brand-900: #0f172a;
+      --brand-800: #1e3a8a;
+      --brand-600: #2563eb;
+      --brand-500: #3b82f6;
+      --brand-100: #dbeafe;
+      --brand-50: #eff6ff;
+
+      /* Semantic Status (Clusters & Thresholds) */
+      --k1: #059669;
+      --k1-bg: #ecfdf5;
+      --k1-border: #a7f3d0;
+      --k1-ink: #065f46;
+
+      --k2: #d97706;
+      --k2-bg: #fffbeb;
+      --k2-border: #fde68a;
+      --k2-ink: #92400e;
+
+      --k3: #e11d48;
+      --k3-bg: #fff1f2;
+      --k3-border: #fecdd3;
+      --k3-ink: #9f1239;
+
+      --compare-accent: #7c3aed;
+
+      /* Chart threshold washes */
+      --band-good-fill: rgba(5, 150, 105, 0.055);
+      --band-fair-fill: rgba(217, 119, 6, 0.055);
+      --band-poor-fill: rgba(225, 29, 72, 0.045);
+
+      /* Typography */
+      --font-display: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+      /* Radii & Shadows */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+      --radius-pill: 9999px;
+
+      --shadow-xs: 0 1px 2px rgb(15 23 42 / 0.04);
+      --shadow-sm: 0 1px 3px rgb(15 23 42 / 0.06), 0 1px 2px rgb(15 23 42 / 0.04);
+      --shadow-md: 0 10px 25px -5px rgb(15 23 42 / 0.07), 0 4px 10px -4px rgb(15 23 42 / 0.04);
+      --shadow-lg: 0 20px 40px -12px rgb(15 23 42 / 0.14);
+
+      /* Sticky offset */
+      --nav-height: 64px;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --dur-fast: 150ms;
+      --dur-med: 240ms;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--nav-height) + 18px);
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--brand-600);
+      outline-offset: 2px;
+    }
+
+    /* Visually hidden status region */
+    .sr-only {
+      position: absolute;
+      inline-size: 1px;
+      block-size: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .skip-link {
+      position: absolute;
+      inset-inline-start: -9999px;
+      inset-block-start: 12px;
+      background: var(--brand-800);
+      color: #ffffff;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-decoration: none;
+      z-index: 100;
+    }
+    .skip-link:focus { inset-inline-start: 16px; }
+
+    /* Hero Header Band (Modern GovTech Slate-Indigo) */
+    .hero-band {
+      position: relative;
+      background:
+        radial-gradient(900px 380px at 85% -10%, rgb(59 130 246 / 0.32), transparent 60%),
+        radial-gradient(600px 300px at 10% 110%, rgb(16 185 129 / 0.14), transparent 55%),
+        linear-gradient(135deg, #0f172a 0%, #172554 52%, #1e3a8a 100%);
+      color: #f8fafc;
+      padding-block: 2.5rem 2.25rem;
+      padding-inline: 1.5rem;
+      border-block-end: 1px solid rgb(255 255 255 / 0.1);
+    }
+    .hero-inner {
+      max-inline-size: 1320px;
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: center;
+    }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      background: rgb(255 255 255 / 0.1);
+      border: 1px solid rgb(255 255 255 / 0.16);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      color: #bfdbfe;
+      margin-block-end: 0.875rem;
+    }
+    .hero-pill-dot {
+      inline-size: 7px;
+      block-size: 7px;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 0 3px rgb(52 211 153 / 0.25);
+    }
+    .hero-band h1 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.55rem, 1.25rem + 1.25vw, 2.25rem);
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+      color: #ffffff;
+      margin: 0 0 0.75rem;
+    }
+    .hero-lede {
+      font-size: 0.9375rem;
+      color: #cbd5e1;
+      max-inline-size: 64ch;
+      margin: 0;
+    }
+
+    .hero-meta-card {
+      background: rgb(255 255 255 / 0.07);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgb(255 255 255 / 0.14);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .hero-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.8125rem;
+      padding-block-end: 0.55rem;
+      border-block-end: 1px solid rgb(255 255 255 / 0.1);
+    }
+    .hero-meta-row:last-of-type { border-block-end: none; padding-block-end: 0; }
+    .hero-meta-key {
+      color: #94a3b8;
+      font-weight: 500;
+    }
+    .hero-meta-val {
+      color: #ffffff;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-block-start: 0.35rem;
+    }
+
+    /* State-Aware Sticky Top Navigation Bar */
+    .sticky-nav-wrap {
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 30;
+      container-type: scroll-state;
+      container-name: top-nav;
+    }
+    .sticky-nav {
+      background: rgb(255 255 255 / 0.88);
+      backdrop-filter: blur(12px);
+      border-block-end: 1px solid var(--border);
+      transition: box-shadow var(--dur-med) var(--ease-out), background-color var(--dur-med) var(--ease-out);
+    }
+    @container top-nav scroll-state(stuck: top) {
+      .sticky-nav {
+        background: rgb(255 255 255 / 0.96);
+        box-shadow: var(--shadow-md);
+      }
+    }
+    .sticky-nav-wrap.is-stuck .sticky-nav {
+      background: rgb(255 255 255 / 0.96);
+      box-shadow: var(--shadow-md);
+    }
+    .sticky-nav-inner {
+      max-inline-size: 1320px;
+      margin-inline: auto;
+      padding-inline: 1.5rem;
+      min-block-size: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .nav-pills {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-block: 0.5rem;
+    }
+    .nav-pills::-webkit-scrollbar { display: none; }
+    .nav-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 13px;
+      border-radius: var(--radius-pill);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--ink-secondary);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+    }
+    .nav-pill:hover {
+      background: var(--surface-subtle);
+      color: var(--ink);
+    }
+    .nav-pill.is-current {
+      background: var(--brand-50);
+      color: var(--brand-800);
+    }
+    .nav-quick-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--ink-secondary);
+      background: var(--surface-subtle);
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Main Page Shell */
+    .page-shell {
+      max-inline-size: 1320px;
+      margin-inline: auto;
+      padding: 2rem 1.5rem 4rem;
+      display: grid;
+      gap: 2.75rem;
+    }
+    .page-shell * { min-inline-size: 0; }
+
+    /* Section Headers */
+    .section-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 0.75rem 1.5rem;
+      margin-block-end: 1.25rem;
+    }
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--brand-600);
+      margin-block-end: 0.35rem;
+    }
+    .section-head h2 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(1.25rem, 1.1rem + 0.55vw, 1.55rem);
+      letter-spacing: -0.02em;
+      line-height: 1.22;
+      margin: 0;
+      color: var(--ink);
+    }
+    .section-note {
+      font-size: 0.8125rem;
+      color: var(--ink-muted);
+      max-inline-size: 50ch;
+      margin: 0;
+    }
+
+    /* Buttons */
+    .btn {
+      font-family: var(--font-sans);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      min-block-size: 38px;
+      padding: 0 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+      white-space: nowrap;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn-hero-primary {
+      background: #ffffff;
+      color: var(--brand-900);
+    }
+    .btn-hero-primary:hover { background: #e2e8f0; }
+    .btn-hero-ghost {
+      background: rgb(255 255 255 / 0.1);
+      color: #ffffff;
+      border-color: rgb(255 255 255 / 0.22);
+    }
+    .btn-hero-ghost:hover { background: rgb(255 255 255 / 0.18); }
+    .btn-primary {
+      background: var(--brand-600);
+      color: #ffffff;
+    }
+    .btn-primary:hover { background: var(--brand-800); }
+    .btn-outline {
+      background: var(--surface);
+      color: var(--ink);
+      border-color: var(--border-strong);
+    }
+    .btn-outline:hover { background: var(--surface-subtle); }
+    .btn-filter {
+      background: var(--surface);
+      color: var(--ink-secondary);
+      border-color: var(--border);
+      border-radius: var(--radius-pill);
+      min-block-size: 36px;
+      padding: 0 14px;
+    }
+    .btn-filter:hover {
+      background: var(--surface-subtle);
+      color: var(--ink);
+    }
+    .btn-filter.is-active {
+      background: var(--brand-800);
+      color: #ffffff;
+      border-color: var(--brand-800);
+      box-shadow: 0 2px 6px rgb(30 58 138 / 0.22);
+    }
+
+    /* Soft Badges / Pills */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    .badge-k1 { background: var(--k1-bg); color: var(--k1-ink); border-color: var(--k1-border); }
+    .badge-k2 { background: var(--k2-bg); color: var(--k2-ink); border-color: var(--k2-border); }
+    .badge-k3 { background: var(--k3-bg); color: var(--k3-ink); border-color: var(--k3-border); }
+    .badge-brand { background: var(--brand-50); color: var(--brand-800); border-color: var(--brand-100); }
+
+    /* Bento Cards */
+    .bento-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-xs);
+      padding: 1.25rem;
+    }
+
+    /* Section 1: Bento KPI Grid */
+    .bento-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .kpi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-xs);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: left;
+      font-family: inherit;
+      transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+    }
+    .kpi-card-interactive {
+      cursor: pointer;
+      width: 100%;
+    }
+    .kpi-card-interactive:hover {
+      border-color: var(--brand-500);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .kpi-card-interactive.is-active-cluster {
+      border-color: var(--brand-600);
+      background: linear-gradient(180deg, var(--brand-50) 0%, #ffffff 100%);
+      box-shadow: 0 0 0 3px rgb(37 99 235 / 0.14);
+    }
+    .kpi-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .kpi-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--ink-muted);
+    }
+    .kpi-val {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.8rem, 1.5rem + 0.8vw, 2.25rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+      color: var(--ink);
+    }
+    .kpi-val .unit {
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--ink-muted);
+    }
+    .kpi-delta {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--ink-secondary);
+    }
+    .kpi-delta.is-good { color: var(--k1); }
+    .kpi-delta.is-poor { color: var(--k3); }
+    .kpi-progress-track {
+      inline-size: 100%;
+      block-size: 6px;
+      border-radius: var(--radius-pill);
+      background: var(--surface-subtle);
+      overflow: hidden;
+      margin-block: 0.15rem;
+    }
+    .kpi-progress-fill {
+      block-size: 100%;
+      border-radius: var(--radius-pill);
+      background: var(--brand-600);
+    }
+    .kpi-progress-fill.is-k1 { background: var(--k1); }
+    .kpi-progress-fill.is-k2 { background: var(--k2); }
+    .kpi-progress-fill.is-k3 { background: var(--k3); }
+    .kpi-caption {
+      font-size: 0.8125rem;
+      color: var(--ink-secondary);
+      margin: 0;
+      line-height: 1.45;
+    }
+
+    /* Bento Overview Secondary Row: 6-Domain Strip + Cluster Donut */
+    .bento-overview-row {
+      display: grid;
+      grid-template-columns: minmax(0, 2.15fr) minmax(0, 1fr);
+      gap: 1rem;
+      margin-block-start: 1rem;
+      align-items: stretch;
+    }
+    .domain-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .panel-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .panel-title-sm {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0;
+    }
+    .panel-sub-sm {
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+      margin: 0;
+    }
+    .domain-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+    .domain-tile {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 0.875rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .domain-tile.is-strongest {
+      background: var(--k1-bg);
+      border-color: var(--k1-border);
+    }
+    .domain-tile.is-weakest {
+      background: var(--k3-bg);
+      border-color: var(--k3-border);
+    }
+    .domain-code {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+    .domain-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .domain-score-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-block-start: 0.25rem;
+    }
+    .domain-score {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.35rem;
+      font-variant-numeric: tabular-nums;
+      color: var(--ink);
+    }
+    .domain-bar-track {
+      inline-size: 100%;
+      block-size: 5px;
+      background: rgb(15 23 42 / 0.08);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+      margin-block-start: 0.25rem;
+    }
+    .domain-bar-fill {
+      block-size: 100%;
+      border-radius: var(--radius-pill);
+      background: var(--brand-600);
+    }
+    .domain-tile.is-strongest .domain-bar-fill { background: var(--k1); }
+    .domain-tile.is-weakest .domain-bar-fill { background: var(--k3); }
+
+    .donut-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .donut-wrap {
+      position: relative;
+      block-size: 195px;
+      inline-size: 100%;
+    }
+    .donut-center-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .donut-center-num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.5rem;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .donut-center-sub {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--ink-muted);
+      margin-block-start: 3px;
+    }
+    .donut-legend {
+      display: grid;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      color: var(--ink-secondary);
+    }
+    .donut-legend-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .donut-legend-left {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .swatch-dot {
+      inline-size: 9px;
+      block-size: 9px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    /* Context Callout */
+    .context-banner {
+      margin-block-start: 1rem;
+      background: linear-gradient(90deg, #eff6ff 0%, #ffffff 70%);
+      border: 1px solid var(--brand-100);
+      border-inline-start: 4px solid var(--brand-600);
+      border-radius: var(--radius-lg);
+      padding: 1.15rem 1.35rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1.25rem;
+      align-items: center;
+    }
+    .context-banner p {
+      margin: 0;
+      font-size: 0.875rem;
+      color: var(--ink);
+      max-inline-size: 80ch;
+    }
+    .context-metric {
+      text-align: right;
+      border-inline-start: 1px solid var(--border);
+      padding-inline-start: 1.25rem;
+    }
+    .context-metric-num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.55rem;
+      font-variant-numeric: tabular-nums;
+      color: var(--k3);
+    }
+    .context-metric-sub {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--ink-muted);
+    }
+
+    /* Filter Toolbar */
+    .filter-bar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-xs);
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.875rem 1rem;
+      align-items: flex-end;
+      margin-block-end: 1.25rem;
+    }
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .filter-group-grow { flex: 1 1 240px; }
+    .input-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--ink-muted);
+    }
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      flex-wrap: balance;
+      gap: 0.4rem;
+    }
+    .text-input, .select-input {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      color: var(--ink);
+      background: var(--bg);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      min-block-size: 38px;
+      padding: 0 12px;
+      inline-size: 100%;
+    }
+    .text-input:focus, .select-input:focus {
+      background: #ffffff;
+      border-color: var(--brand-600);
+    }
+    .filter-status {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--ink-muted);
+      margin-inline-start: auto;
+      align-self: center;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Section 2: Visualization Split Grid */
+    .viz-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 1.25rem;
+      align-items: start;
+    }
+    .panel-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: 1.35rem;
+    }
+    .panel-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding-block-end: 0.85rem;
+      border-block-end: 1px solid var(--border);
+      margin-block-end: 1rem;
+    }
+    .panel-head h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin: 0;
+      color: var(--ink);
+    }
+    .panel-sub {
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      margin: 0.25rem 0 0;
+    }
+    .legend-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--ink-secondary);
+      margin-block-end: 0.75rem;
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .legend-swatch {
+      inline-size: 10px;
+      block-size: 10px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+    .swatch-k1 { background: var(--k1); }
+    .swatch-k2 { background: var(--k2); }
+    .swatch-k3 { background: var(--k3); }
+    .swatch-avg { border-inline-start: 2px dashed var(--brand-800); inline-size: 2px; block-size: 12px; }
+
+    .ranking-chart-wrap {
+      position: relative;
+      inline-size: 100%;
+      min-block-size: 780px;
+    }
+    .radar-chart-wrap {
+      position: relative;
+      inline-size: 100%;
+      min-block-size: 320px;
+      block-size: 320px;
+    }
+    .bandwidth-chart-wrap {
+      position: relative;
+      inline-size: 100%;
+      min-block-size: 210px;
+      block-size: 210px;
+    }
+
+    .radar-controls {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.65rem;
+      margin-block-end: 0.85rem;
+    }
+
+    /* Selected OPD Inspector */
+    .inspector-box {
+      margin-block-start: 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+    }
+    .inspector-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    .inspector-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.98rem;
+      margin: 0;
+      color: var(--ink);
+    }
+    .inspector-resp {
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+      margin: 0.2rem 0 0;
+    }
+    .inspector-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-block-start: 0.85rem;
+      padding-block-start: 0.75rem;
+      border-block-start: 1px solid var(--border);
+    }
+    .insp-kv-label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--ink-muted);
+    }
+    .insp-kv-val {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.15rem;
+      font-variant-numeric: tabular-nums;
+      color: var(--ink);
+    }
+    .inspector-actions {
+      margin-block-start: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .methodology-note {
+      margin-block-start: 1rem;
+      font-size: 0.78rem;
+      color: var(--ink-secondary);
+      background: var(--surface-subtle);
+      padding: 0.75rem 0.9rem;
+      border-radius: var(--radius-sm);
+      border-inline-start: 3px solid var(--brand-600);
+      line-height: 1.5;
+    }
+
+    /* Section 3: Interactive Sortable & Responsive Table */
+    .table-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+    .table-toolbar {
+      padding: 0.85rem 1.25rem;
+      border-block-end: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--surface);
+    }
+    .table-legend-heat {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.65rem;
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+    }
+    .heat-pill {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+    .heat-good { background: var(--k1-bg); color: var(--k1-ink); }
+    .heat-fair { background: var(--k2-bg); color: var(--k2-ink); }
+    .heat-poor { background: var(--k3-bg); color: var(--k3-ink); }
+
+    .table-wrapper {
+      overflow: auto;
+      max-inline-size: 100%;
+      max-block-size: min(640px, 76dvh);
+      scrollbar-gutter: stable;
+      container-type: inline-size;
+    }
+    table.spbe-table {
+      inline-size: 100%;
+      min-inline-size: 980px;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 0.84rem;
+      font-variant-numeric: tabular-nums;
+    }
+    .spbe-table caption {
+      text-align: left;
+      padding: 0.65rem 1.25rem;
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+      background: var(--surface-subtle);
+      border-block-end: 1px solid var(--border);
+      caption-side: top;
+    }
+    .spbe-table thead th {
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 3;
+      background: var(--surface-subtle);
+      color: var(--ink-secondary);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.65rem 0.65rem;
+      border-block-end: 1px solid var(--border-strong);
+      text-align: left;
+      white-space: nowrap;
+    }
+    .spbe-table thead th:has(> button) {
+      padding: 0;
+    }
+    .spbe-table thead th.num { text-align: right; }
+    .sort-btn {
+      inline-size: 100%;
+      min-block-size: 40px;
+      background: none;
+      border: none;
+      padding: 0.65rem 0.65rem;
+      font: inherit;
+      color: inherit;
+      text-transform: inherit;
+      letter-spacing: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .spbe-table thead th.num .sort-btn { justify-content: flex-end; }
+    .sort-btn:hover { color: var(--brand-600); background: rgb(37 99 235 / 0.04); }
+    .sort-icon {
+      display: inline-block;
+      inline-size: 12px;
+      text-align: center;
+      color: var(--brand-600);
+      font-size: 0.68rem;
+    }
+    .sort-icon::after { content: "⇅"; opacity: 0.35; }
+    th[aria-sort="ascending"] .sort-icon::after { content: "▲"; opacity: 1; }
+    th[aria-sort="descending"] .sort-icon::after { content: "▼"; opacity: 1; }
+
+    .spbe-table tbody tr {
+      cursor: pointer;
+      transition: background-color var(--dur-fast) var(--ease-out);
+    }
+    .spbe-table tbody tr td {
+      padding: 0.65rem 0.65rem;
+      border-block-end: 1px solid var(--border);
+      vertical-align: middle;
+      background: var(--surface);
+    }
+    .spbe-table tbody tr:hover td { background: #f8fafc; }
+    .spbe-table tbody tr.is-selected-row td { background: var(--brand-50); }
+    .spbe-table tbody tr.is-placeholder-row { cursor: default; }
+    .spbe-table tbody tr.is-placeholder-row td {
+      background: var(--surface-subtle);
+      color: var(--ink-muted);
+    }
+    .spbe-table tbody tr[hidden] { display: none; }
+
+    .spbe-table td.num { text-align: right; }
+    .spbe-table td.score-strong {
+      font-family: var(--font-display);
+      font-weight: 800;
+      color: var(--ink);
+    }
+    .rank-cell {
+      font-weight: 700;
+      color: var(--ink-muted);
+      text-align: center;
+      inline-size: 62px;
+    }
+    .opd-cell-name {
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .opd-cell-sub {
+      font-size: 0.74rem;
+      color: var(--ink-muted);
+    }
+    .row-detail-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 9px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--brand-800);
+      cursor: pointer;
+    }
+    .row-detail-btn:hover {
+      background: var(--brand-50);
+      border-color: var(--brand-500);
+    }
+
+    .spbe-table tfoot td {
+      background: var(--surface-subtle);
+      border-block-start: 2px solid var(--border-strong);
+      font-weight: 700;
+      padding: 0.75rem 0.65rem;
+      color: var(--ink);
+    }
+
+    @container (width < 680px) {
+      .spbe-table { min-inline-size: 860px; }
+    }
+
+    /* Section 4: Anomalies Grid */
+    .anomalies-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+      align-items: stretch;
+    }
+    .anomaly-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-block-start: 4px solid var(--k3);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .anomaly-card.is-warning { border-block-start-color: var(--k2); }
+    .anomaly-num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 2.15rem;
+      line-height: 1.05;
+      font-variant-numeric: tabular-nums;
+      color: var(--k3);
+    }
+    .anomaly-card.is-warning .anomaly-num { color: var(--k2); }
+    .anomaly-card h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.02rem;
+      margin: 0;
+      color: var(--ink);
+    }
+    .anomaly-card p {
+      font-size: 0.85rem;
+      color: var(--ink-secondary);
+      margin: 0;
+      line-height: 1.55;
+    }
+    .split-bar-container {
+      margin-block-start: auto;
+      padding-block-start: 0.75rem;
+      border-block-start: 1px solid var(--border);
+    }
+    .split-bar-track {
+      block-size: 12px;
+      inline-size: 100%;
+      background: var(--surface-subtle);
+      display: flex;
+      overflow: hidden;
+      border-radius: var(--radius-pill);
+    }
+    .split-bar-danger { background: var(--k3); }
+    .split-bar-ok { background: var(--k1); }
+    .split-bar-legend {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-block-start: 0.45rem;
+      color: var(--ink-secondary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Section 5: Policy Grid */
+    .policy-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+    .policy-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .policy-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      padding-block-end: 0.65rem;
+      border-block-end: 1px solid var(--border);
+    }
+    .policy-index {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--brand-600);
+    }
+    .policy-card h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.08rem;
+      margin: 0;
+      color: var(--ink);
+    }
+    .policy-card p {
+      font-size: 0.865rem;
+      color: var(--ink-secondary);
+      margin: 0;
+      line-height: 1.58;
+    }
+    .policy-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-block-start: auto;
+      padding-block-start: 0.75rem;
+      border-block-start: 1px solid var(--border);
+      font-size: 0.8125rem;
+    }
+    .policy-meta-label {
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--ink-muted);
+      font-weight: 700;
+    }
+    .policy-meta-val {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* Native Modal Dialog for OPD Detail */
+    dialog.opd-dialog {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lg);
+      padding: 0;
+      inline-size: min(640px, 94vw);
+      max-block-size: 88dvh;
+      background: var(--surface);
+      color: var(--ink);
+    }
+    dialog.opd-dialog:modal {
+      overscroll-behavior: contain;
+    }
+    dialog.opd-dialog::backdrop {
+      overflow: hidden;
+      overscroll-behavior: contain;
+      background: rgb(15 23 42 / 0.48);
+      backdrop-filter: blur(4px);
+    }
+    .dialog-shell {
+      display: flex;
+      flex-direction: column;
+    }
+    .dialog-head {
+      padding: 1.25rem 1.4rem;
+      border-block-end: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      background: var(--bg);
+    }
+    .dialog-head h2 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin: 0.35rem 0 0.2rem;
+      color: var(--ink);
+    }
+    .dialog-close-btn {
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      inline-size: 36px;
+      block-size: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--ink-secondary);
+      flex-shrink: 0;
+    }
+    .dialog-close-btn:hover {
+      background: var(--surface-subtle);
+      color: var(--ink);
+    }
+    .dialog-body {
+      padding: 1.35rem 1.4rem;
+      display: grid;
+      gap: 1.15rem;
+    }
+    .dialog-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+    .dialog-stat {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 0.9rem;
+    }
+    .dialog-domain-list {
+      display: grid;
+      gap: 0.55rem;
+    }
+    .dialog-domain-row {
+      display: grid;
+      grid-template-columns: 165px minmax(0, 1fr) 74px;
+      gap: 0.75rem;
+      align-items: center;
+      font-size: 0.8125rem;
+    }
+    .dialog-bar-track {
+      block-size: 8px;
+      background: var(--surface-subtle);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+    }
+    .dialog-bar-fill {
+      block-size: 100%;
+      border-radius: var(--radius-pill);
+      background: var(--brand-600);
+    }
+    .dialog-advice {
+      background: var(--brand-50);
+      border: 1px solid var(--brand-100);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1rem;
+      font-size: 0.84rem;
+      color: var(--ink);
+    }
+    .dialog-foot {
+      padding: 1rem 1.4rem;
+      border-block-start: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.65rem;
+      background: var(--bg);
+    }
+
+    /* Footer */
+    .report-footer {
+      max-inline-size: 1320px;
+      margin-inline: auto;
+      padding: 1.5rem 1.5rem 3rem;
+      border-block-start: 1px solid var(--border);
+      font-size: 0.8125rem;
+      color: var(--ink-muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .empty-state {
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      color: var(--ink-muted);
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 1100px) {
+      .bento-kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .bento-overview-row { grid-template-columns: 1fr; }
+      .viz-grid { grid-template-columns: 1fr; }
+      .anomalies-grid { grid-template-columns: 1fr; }
+      .hero-inner { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 680px) {
+      .page-shell { padding: 1.25rem 1rem 3rem; gap: 2rem; }
+      .hero-band { padding: 1.5rem 1rem; }
+      .bento-kpi-grid { grid-template-columns: 1fr; }
+      .domain-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .policy-grid { grid-template-columns: 1fr; }
+      .context-banner { grid-template-columns: 1fr; }
+      .context-metric { border-inline-start: none; border-block-start: 1px solid var(--border); padding-inline-start: 0; padding-block-start: 0.75rem; text-align: left; }
+      .radar-controls { grid-template-columns: 1fr; }
+      .nav-quick-badge { display: none; }
+      .dialog-domain-row { grid-template-columns: 120px minmax(0, 1fr) 64px; }
+      .dialog-summary-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    @media print {
+      .sticky-nav-wrap, .filter-bar, .hero-actions, .row-detail-btn, .inspector-actions { display: none !important; }
+      .table-wrapper { max-block-size: none; overflow: visible; }
+      body { background: #ffffff; }
+      .hero-band { background: #1e3a8a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .bento-card, .kpi-card, .panel-card, .table-card, .anomaly-card, .policy-card { box-shadow: none; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#ringkasan-eksekutif" class="skip-link">Langsung ke Ringkasan Eksekutif</a>
+
+  <!-- Hero Header -->
+  <header class="hero-band">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-pill">
+          <span class="hero-pill-dot" aria-hidden="true"></span>
+          <span>Pemerintah Kabupaten Landak · Laporan Eksekutif Transformasi Digital 2026</span>
+        </div>
+        <h1>Rekapitulasi &amp; Evaluasi Indeks Kematangan SPBE 31 Perangkat Daerah</h1>
+        <p class="hero-lede">
+          Dokumen pengarahan eksekutif bagi Bupati dan Sekretaris Daerah Kabupaten Landak berdasarkan hasil evaluasi
+          Kuesioner SPBE Versi 2, Asistensi Infrastruktur TIK OPD, serta Asesmen Kesiapan Pemerintah Digital Tahun 2026.
+        </p>
+      </div>
+
+      <div class="hero-meta-card">
+        <div class="hero-meta-row">
+          <span class="hero-meta-key">Metodologi</span>
+          <span class="hero-meta-val">Panduan Teknis Kuesioner V2</span>
+        </div>
+        <div class="hero-meta-row">
+          <span class="hero-meta-key">Cakupan Entitas</span>
+          <span class="hero-meta-val">31 Perangkat Daerah Definitif</span>
+        </div>
+        <div class="hero-meta-row">
+          <span class="hero-meta-key">Bobot Domain</span>
+          <span class="hero-meta-val">15% · 20% · 20% · 15% · 15% · 15%</span>
+        </div>
+        <div class="hero-actions">
+          <button type="button" class="btn btn-hero-primary" onclick="window.print()">
+            <i data-lucide="printer" width="15" height="15" aria-hidden="true"></i>
+            Cetak Laporan
+          </button>
+          <button type="button" class="btn btn-hero-ghost" onclick="exportCsv()">
+            <i data-lucide="download" width="15" height="15" aria-hidden="true"></i>
+            Unduh CSV
+          </button>
+          <button type="button" class="btn btn-hero-ghost" onclick="scrollToSection('kebijakan')">
+            <i data-lucide="compass" width="15" height="15" aria-hidden="true"></i>
+            4 Arahan Kebijakan
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- State-Aware Sticky Navigation -->
+  <div class="sticky-nav-wrap" id="stickyNavWrap">
+    <nav class="sticky-nav" aria-label="Navigasi Bagian Dashboard">
+      <div class="sticky-nav-inner">
+        <div class="nav-pills">
+          <a class="nav-pill is-current" href="#ringkasan-eksekutif">01. Ringkasan &amp; KPI</a>
+          <a class="nav-pill" href="#visualisasi-data">02. Peringkat &amp; Radar</a>
+          <a class="nav-pill" href="#tabel-opd">03. Tabel 31 OPD</a>
+          <a class="nav-pill" href="#temuan-kritis">04. Anomali Kritis</a>
+          <a class="nav-pill" href="#kebijakan">05. Arahan Kebijakan</a>
+        </div>
+        <div class="nav-quick-badge">
+          <span>Indeks Kab. Landak:</span>
+          <strong style="color: var(--k3);">2,49 / 4,00</strong>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <main class="page-shell">
+    <!-- SECTION 1: RINGKASAN EKSEKUTIF & BENTO KPI -->
+    <section id="ringkasan-eksekutif" aria-labelledby="heading-ringkasan">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Bagian 01 · Potret Agregat Daerah</div>
+          <h2 id="heading-ringkasan">Ringkasan Eksekutif &amp; Indikator Kinerja Utama SPBE 2026</h2>
+        </div>
+        <p class="section-note">
+          Klik kartu klaster di bawah untuk menyaring grafik peringkat dan tabel perangkat daerah secara langsung.
+        </p>
+      </div>
+
+      <!-- 4 Top Bento KPI Cards -->
+      <div class="bento-kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Indeks SPBE Kab. Landak</span>
+            <span class="badge badge-k3">Kurang</span>
+          </div>
+          <div class="kpi-val">2,49 <span class="unit">/ 4,00</span></div>
+          <div class="kpi-progress-track" aria-hidden="true">
+            <div class="kpi-progress-fill is-k3" style="width: 62.25%;"></div>
+          </div>
+          <div class="kpi-delta is-poor">Di bawah ambang Cukup (2,50) &amp; Baik (3,00)</div>
+          <p class="kpi-caption">
+            Rata-rata tertimbang 31 Perangkat Daerah (2026). Indeks SPBE Nasional Kab. Landak 2025 tercatat 2,45.
+          </p>
+        </div>
+
+        <button type="button" class="kpi-card kpi-card-interactive" id="kpi-k1" onclick="toggleClusterFromCard('K1')">
+          <div class="kpi-top">
+            <span class="kpi-label">Klaster 1 · Maju</span>
+            <span class="badge badge-k1">Percontohan</span>
+          </div>
+          <div class="kpi-val">11 <span class="unit">OPD (35,5%)</span></div>
+          <div class="kpi-progress-track" aria-hidden="true">
+            <div class="kpi-progress-fill is-k1" style="width: 35.5%;"></div>
+          </div>
+          <div class="kpi-delta is-good">Puncak: Dinas Pendidikan (3,28)</div>
+          <p class="kpi-caption">
+            Kelompok OPD pemimpin (≥ 2,60) yang siap menjadi percontohan lintas perangkat daerah.
+          </p>
+        </button>
+
+        <button type="button" class="kpi-card kpi-card-interactive" id="kpi-k2" onclick="toggleClusterFromCard('K2')">
+          <div class="kpi-top">
+            <span class="kpi-label">Klaster 2 · Berkembang</span>
+            <span class="badge badge-k2">Konsolidasi</span>
+          </div>
+          <div class="kpi-val">13 <span class="unit">OPD (41,9%)</span></div>
+          <div class="kpi-progress-track" aria-hidden="true">
+            <div class="kpi-progress-fill is-k2" style="width: 41.9%;"></div>
+          </div>
+          <div class="kpi-delta">Rentang Indeks 2,20 – 2,59</div>
+          <p class="kpi-caption">
+            Memiliki dasar operasional digital, namun lemah pada integrasi data, siklus aplikasi, dan keamanan.
+          </p>
+        </button>
+
+        <button type="button" class="kpi-card kpi-card-interactive" id="kpi-k3" onclick="toggleClusterFromCard('K3')">
+          <div class="kpi-top">
+            <span class="kpi-label">Klaster 3 · Prioritas Pembinaan</span>
+            <span class="badge badge-k3">Intervensi</span>
+          </div>
+          <div class="kpi-val">7 <span class="unit">OPD (22,6%)</span></div>
+          <div class="kpi-progress-track" aria-hidden="true">
+            <div class="kpi-progress-fill is-k3" style="width: 22.6%;"></div>
+          </div>
+          <div class="kpi-delta is-poor">Terendah: Diskumindag (1,81)</div>
+          <p class="kpi-caption">
+            Tertinggal (&lt; 2,20) akibat defisit infrastruktur, kekosongan admin TIK, dan proses manual.
+          </p>
+        </button>
+      </div>
+
+      <!-- Bento Secondary Row: 6 Domain + Donut Distribution -->
+      <div class="bento-overview-row">
+        <div class="bento-card domain-panel">
+          <div class="panel-title-row">
+            <div>
+              <h3 class="panel-title-sm">Skor Agregat 6 Domain SPBE Kabupaten Landak</h3>
+              <p class="panel-sub-sm">Perhitungan tertimbang Kuesioner SPBE Versi 2 (Skala 0,00 – 4,00)</p>
+            </div>
+            <span class="badge badge-brand">6 Domain Utama</span>
+          </div>
+
+          <div class="domain-grid">
+            <div class="domain-tile is-strongest">
+              <div class="domain-code"><span>D1</span><span>Bobot 15%</span></div>
+              <div class="domain-name">Proses Bisnis</div>
+              <div class="domain-score-row">
+                <span class="domain-score">2,78</span>
+                <span class="badge badge-k1">Tertinggi</span>
+              </div>
+              <div class="domain-bar-track"><div class="domain-bar-fill" style="width: 69.5%;"></div></div>
+            </div>
+
+            <div class="domain-tile">
+              <div class="domain-code"><span>D3</span><span>Bobot 20%</span></div>
+              <div class="domain-name">Layanan SPBE</div>
+              <div class="domain-score-row">
+                <span class="domain-score">2,50</span>
+                <span class="badge badge-k2">Moderat</span>
+              </div>
+              <div class="domain-bar-track"><div class="domain-bar-fill" style="width: 62.5%;"></div></div>
+            </div>
+
+            <div class="domain-tile">
+              <div class="domain-code"><span>D2</span><span>Bobot 20%</span></div>
+              <div class="domain-name">Data &amp; Informasi</div>
+              <div class="domain-score-row">
+                <span class="domain-score">2,45</span>
+                <span class="badge badge-k3">Kurang</span>
+              </div>
+              <div class="domain-bar-track"><div class="domain-bar-fill" style="width: 61.25%;"></div></div>
+            </div>
+
+            <div class="domain-tile">
+              <div class="domain-code"><span>D5</span><span>Bobot 15%</span></div>
+              <div class="domain-name">Infrastruktur TIK</div>
+              <div class="domain-score-row">
+                <span class="domain-score">2,29</span>
+                <span class="badge badge-k3">Kurang</span>
+              </div>
+              <div class="domain-bar-track"><div class="domain-bar-fill" style="width: 57.25%;"></div></div>
+            </div>
+
+            <div class="domain-tile">
+              <div class="domain-code"><span>D6</span><span>Bobot 15%</span></div>
+              <div class="domain-name">Keamanan Informasi</div>
+              <div class="domain-score-row">
+                <span class="domain-score">2,29</span>
+                <span class="badge badge-k3">Kurang</span>
+              </div>
+              <div class="domain-bar-track"><div class="domain-bar-fill" style="width: 57.25%;"></div></div>
+            </div>
+
+            <div class="domain-tile is-weakest">
+              <div class="domain-code"><span>D4</span><span>Bobot 15%</span></div>
+              <div class="domain-name">Aplikasi</div>
+              <div class="domain-score-row">
+                <span class="domain-score">2,21</span>
+                <span class="badge badge-k3">Terlemah</span>
+              </div>
+              <div class="domain-bar-track"><div class="domain-bar-fill" style="width: 55.25%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bento-card donut-card">
+          <div>
+            <h3 class="panel-title-sm">Proporsi Klaster 31 OPD</h3>
+            <p class="panel-sub-sm">Sebaran tingkat kematangan perangkat daerah</p>
+          </div>
+          <div class="donut-wrap">
+            <canvas id="clusterDonutChart" aria-label="Grafik donat proporsi klaster 31 OPD"></canvas>
+            <div class="donut-center-label">
+              <span class="donut-center-num">31</span>
+              <span class="donut-center-sub">Total OPD</span>
+            </div>
+          </div>
+          <div class="donut-legend">
+            <div class="donut-legend-row">
+              <span class="donut-legend-left"><span class="swatch-dot" style="background: var(--k1);"></span> Klaster 1 (Maju)</span>
+              <strong>11 OPD · 35,5%</strong>
+            </div>
+            <div class="donut-legend-row">
+              <span class="donut-legend-left"><span class="swatch-dot" style="background: var(--k2);"></span> Klaster 2 (Berkembang)</span>
+              <strong>13 OPD · 41,9%</strong>
+            </div>
+            <div class="donut-legend-row">
+              <span class="donut-legend-left"><span class="swatch-dot" style="background: var(--k3);"></span> Klaster 3 (Pembinaan)</span>
+              <strong>7 OPD · 22,6%</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cross-validation context with Komdigi Digital Readiness 2026 -->
+      <div class="context-banner">
+        <p>
+          <strong>Kesesuaian Diagnosis Lintas Instrumen:</strong> Temuan Evaluasi Kuesioner V2 (2,49 · Predikat Kurang) sejalan
+          dengan hasil <em>Asesmen Kesiapan Pemerintah Digital Kabupaten Landak oleh Komdigi Tahun 2026</em>. Kelemahan struktural
+          terpusat pada tata kelola aplikasi (duplikasi dan belum adanya <em>IT Clearance</em>), keamanan teknologi &amp; data,
+          serta pemerataan infrastruktur jaringan intra-pemerintah.
+        </p>
+        <div class="context-metric">
+          <div class="context-metric-num">0,64 <span style="font-size: 0.875rem; color: var(--ink-muted);">/ 2,00</span></div>
+          <div class="context-metric-sub">Kesiapan Digital Komdigi 2026 (32% · Belum Siap)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: VISUALISASI GRAFIS DATA INTERAKTIF -->
+    <section id="visualisasi-data" aria-labelledby="heading-viz">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Bagian 02 · Peta Peringkat &amp; Profil Domain</div>
+          <h2 id="heading-viz">Visualisasi Peringkat 31 OPD &amp; Perbandingan 6 Domain</h2>
+        </div>
+        <p class="section-note">
+          Klik batang OPD pada grafik untuk membandingkan profil 6 domainnya terhadap rata-rata Kabupaten Landak atau OPD pembanding lain.
+        </p>
+      </div>
+
+      <!-- Unified Filter & Search Bar -->
+      <div class="filter-bar" role="region" aria-label="Filter dan Pencarian Perangkat Daerah">
+        <div class="filter-group">
+          <span class="input-label">Filter Klaster Kinerja</span>
+          <div class="btn-row" role="group" aria-label="Pilihan Klaster">
+            <button type="button" class="btn btn-filter is-active" data-cluster="ALL" onclick="setClusterFilter('ALL')">Semua (31)</button>
+            <button type="button" class="btn btn-filter" data-cluster="K1" onclick="setClusterFilter('K1')">Klaster 1: Maju (11)</button>
+            <button type="button" class="btn btn-filter" data-cluster="K2" onclick="setClusterFilter('K2')">Klaster 2: Berkembang (13)</button>
+            <button type="button" class="btn btn-filter" data-cluster="K3" onclick="setClusterFilter('K3')">Klaster 3: Pembinaan (7)</button>
+          </div>
+        </div>
+
+        <div class="filter-group filter-group-grow">
+          <label class="input-label" for="search-opd">Cari Nama Dinas / Perangkat Daerah</label>
+          <input type="search" id="search-opd" class="text-input" placeholder="Contoh: Pendidikan, Kominfo, BPBD, Diskumindag…" oninput="setSearchQuery(this.value)">
+        </div>
+
+        <div class="filter-group" style="min-inline-size: 185px;">
+          <label class="input-label" for="filter-predikat">Filter Predikat</label>
+          <select id="filter-predikat" class="select-input" onchange="setPredicateFilter(this.value)">
+            <option value="ALL">Semua Predikat</option>
+            <option value="Baik">Baik (≥ 3,00)</option>
+            <option value="Cukup">Cukup (2,50 – 2,99)</option>
+            <option value="Kurang">Kurang (&lt; 2,50)</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <span class="input-label" aria-hidden="true">&nbsp;</span>
+          <button type="button" class="btn btn-outline" onclick="resetAllFilters()">Reset Filter</button>
+        </div>
+
+        <div class="filter-status" id="filter-status-text">Menampilkan 30 entri terverifikasi (Rekap Definitif 31 OPD)</div>
+      </div>
+
+      <!-- Two-Column Visualizations -->
+      <div class="viz-grid">
+        <!-- Left: Ranking Bar Chart -->
+        <div class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Grafik Peringkat Indeks SPBE Tertimbang (Peringkat #1 – #31)</h3>
+              <p class="panel-sub">Garis batas ambang predikat Kurang (&lt;2,50), Cukup (2,50–2,99), dan Baik (≥3,00) serta rata-rata kabupaten (2,49).</p>
+            </div>
+          </div>
+          <div class="legend-row">
+            <span class="legend-item"><span class="legend-swatch swatch-k1"></span> Klaster 1: Maju</span>
+            <span class="legend-item"><span class="legend-swatch swatch-k2"></span> Klaster 2: Berkembang</span>
+            <span class="legend-item"><span class="legend-swatch swatch-k3"></span> Klaster 3: Prioritas Pembinaan</span>
+            <span class="legend-item"><span class="legend-swatch swatch-avg"></span> Rata-rata Kab. (2,49)</span>
+          </div>
+          <div class="ranking-chart-wrap" id="rankingChartWrap">
+            <canvas id="rankingChart" aria-label="Grafik batang peringkat indeks SPBE perangkat daerah"></canvas>
+          </div>
+          <div id="ranking-empty-msg" class="empty-state" style="display: none;">
+            Tidak ada perangkat daerah yang cocok dengan kriteria pencarian dan filter saat ini.
+            <div style="margin-block-start: 0.75rem;">
+              <button type="button" class="btn btn-outline" onclick="resetAllFilters()">Tampilkan Semua OPD</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Radar Chart + Compare + Inspector -->
+        <div class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Profil Radar 6 Domain SPBE</h3>
+              <p class="panel-sub">Bandingkan capaian domain OPD terpilih terhadap rata-rata Kabupaten Landak atau OPD lain.</p>
+            </div>
+          </div>
+
+          <div class="radar-controls">
+            <div class="filter-group">
+              <label class="input-label" for="radar-opd-select">OPD Utama</label>
+              <select id="radar-opd-select" class="select-input" onchange="selectOpdById(this.value)"></select>
+            </div>
+            <div class="filter-group">
+              <label class="input-label" for="radar-compare-select">Pembanding Ke-2 (Opsional)</label>
+              <select id="radar-compare-select" class="select-input" onchange="setCompareOpd(this.value)"></select>
+            </div>
+          </div>
+
+          <div class="radar-chart-wrap" id="radarChartWrap">
+            <canvas id="radarChart" aria-label="Grafik radar perbandingan 6 domain SPBE"></canvas>
+          </div>
+
+          <!-- Selected OPD Inspector -->
+          <div class="inspector-box" id="opd-inspector">
+            <div class="inspector-head">
+              <div>
+                <h4 class="inspector-title" id="insp-name">Dinas Pendidikan Kabupaten Landak</h4>
+                <p class="inspector-resp" id="insp-resp">Responden: Thedriana Riri — Jf. Pranata Komputer Ahli Pertama</p>
+              </div>
+              <span class="badge badge-k1" id="insp-cluster-badge">Klaster 1: Maju</span>
+            </div>
+            <div class="inspector-metrics">
+              <div>
+                <div class="insp-kv-label">Peringkat</div>
+                <div class="insp-kv-val" id="insp-rank">#1</div>
+              </div>
+              <div>
+                <div class="insp-kv-label">Indeks Tertimbang</div>
+                <div class="insp-kv-val" id="insp-score">3,28</div>
+              </div>
+              <div>
+                <div class="insp-kv-label">Predikat</div>
+                <div class="insp-kv-val" id="insp-predikat">Baik</div>
+              </div>
+            </div>
+            <p class="panel-sub" id="insp-gap-note" style="margin-block-start: 0.65rem;"></p>
+            <div class="inspector-actions">
+              <button type="button" class="btn btn-primary" onclick="openOpdDialog(state.selectedOpdId)">
+                <i data-lucide="panel-right-open" width="15" height="15" aria-hidden="true"></i>
+                Lihat Detail &amp; Rekomendasi OPD
+              </button>
+            </div>
+          </div>
+
+          <div class="methodology-note">
+            <strong>Catatan Rekonsiliasi Data V2:</strong> Rekapitulasi definitif mencakup <strong>31 Perangkat Daerah</strong>
+            (Indeks Kab. <strong>2,49</strong>; sebaran Klaster 11 / 13 / 7; peringkat #1 Dinas Pendidikan <strong>3,28</strong> hingga #31 Diskumindag <strong>1,81</strong>).
+            Data rincian per OPD pada grafik dan tabel bersumber dari lampiran 30 entri terverifikasi (No. Urut 1–31 dengan No. Urut 25 tidak tercantum dalam berkas ekspor CSV).
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: TABEL DATA INTERAKTIF 31 PERANGKAT DAERAH -->
+    <section id="tabel-opd" aria-labelledby="heading-tabel">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Bagian 03 · Rekapitulasi Definitif Perangkat Daerah</div>
+          <h2 id="heading-tabel">Tabel Skor 6 Domain, Indeks Tertimbang &amp; Klaster Pembinaan</h2>
+        </div>
+        <p class="section-note">
+          Klik tajuk kolom untuk mengurutkan peringkat atau skor domain. Klik baris OPD untuk menyorot di radar atau buka detail lengkap.
+        </p>
+      </div>
+
+      <div class="table-card">
+        <div class="table-toolbar">
+          <div class="table-legend-heat">
+            <span>Indikator Skor Domain:</span>
+            <span class="heat-pill heat-good">≥ 3,00 (Baik)</span>
+            <span class="heat-pill heat-fair">2,50 – 2,99 (Cukup)</span>
+            <span class="heat-pill heat-poor">&lt; 2,50 (Kurang)</span>
+          </div>
+          <button type="button" class="btn btn-outline" onclick="exportCsv()">
+            <i data-lucide="download" width="14" height="14" aria-hidden="true"></i>
+            Ekspor Tabel (CSV)
+          </button>
+        </div>
+
+        <div class="sr-only" role="status" id="table-sort-status"></div>
+
+        <div class="table-wrapper" tabindex="0" role="region" aria-labelledby="spbe-table-caption">
+          <table class="spbe-table" id="spbe-table">
+            <caption id="spbe-table-caption">
+              Rekapitulasi Skor 6 Domain SPBE Versi 2 pada 31 Perangkat Daerah Definitif Kabupaten Landak Tahun 2026
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col" data-key="rank" data-type="number" aria-sort="ascending" style="text-align: center;">
+                  <button type="button" commandfor="spbe-table" command="--sort">
+                    Peringkat <span class="sort-icon" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col" data-key="name" data-type="text">
+                  <button type="button" commandfor="spbe-table" command="--sort">
+                    Nama Perangkat Daerah <span class="sort-icon" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col" class="num" data-key="d1" data-type="number">
+                  <button type="button" commandfor="spbe-table" command="--sort">
+                    D1 ProsBis (15%) <span class="sort-icon" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col" class="num" data-key="d2" data-type="number">
+                  <button type="button" commandfor="spbe-table" command="--sort">
+                    D2 Data (20%) <span class="sort-icon" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col" class="num" data-key="d3" data-type="number">
+                  <button type="button" commandfor="spbe-table" command="--sort">
+                    D3 Layanan (20%) <span class="sort-icon" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col" class="num" data-key="d4" data-type="number">
+                  <button type="button" commandfor="spbe-table" command="--sort">
+                    D4 Aplikasi (15%) <span class="sort-icon" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col" class="num" data-key="d5" data-type="number">
+                  <button type="button" commandfor="spbe-table" command="--sort">
+                    D5 Infra (15%) <span class="sort-icon" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col" class="num" data-key="d6" data-type="number">
+                  <button type="button" commandfor="spbe-table" command="--sort">
+                    D6 Keamanan (15%) <span class="sort-icon" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col" class="num" data-key="weighted" data-type="number">
+                  <button type="button" commandfor="spbe-table" command="--sort">
+                    Indeks Tertimbang <span class="sort-icon" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col">Predikat</th>
+                <th scope="col">Klaster Pembinaan</th>
+                <th scope="col" style="text-align: center;">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="spbe-table-body"></tbody>
+            <tfoot>
+              <tr>
+                <td class="rank-cell">—</td>
+                <td>Agregat Resmi Kabupaten Landak (31 Perangkat Daerah Definitif)</td>
+                <td class="num">2,78</td>
+                <td class="num">2,45</td>
+                <td class="num">2,50</td>
+                <td class="num">2,21</td>
+                <td class="num">2,29</td>
+                <td class="num">2,29</td>
+                <td class="num">2,49</td>
+                <td><span class="badge badge-k3">Kurang</span></td>
+                <td colspan="2">11 Maju · 13 Berkembang · 7 Pembinaan</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: ANALISIS TEMUAN STRATEGIS & ANOMALI KRITIS SEKTORAL -->
+    <section id="temuan-kritis" aria-labelledby="heading-temuan">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Bagian 04 · Audit Lapangan &amp; Risiko Operasional</div>
+          <h2 id="heading-temuan">Analisis Temuan Strategis &amp; Anomali Kritis Sektoral</h2>
+        </div>
+        <p class="section-note">
+          Tiga anomali struktural dari Laporan Hasil Asistensi SPBE OPD dan Asesmen Lapangan Komdigi 2026 yang menghambat skor domain Aplikasi, Infrastruktur, dan Keamanan.
+        </p>
+      </div>
+
+      <div class="anomalies-grid">
+        <!-- Anomaly 1: Hosting Sovereignty -->
+        <article class="anomaly-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span class="badge badge-k3">Kedaulatan Data &amp; Siber</span>
+            <i data-lucide="server-off" width="20" height="20" style="color: var(--k3);" aria-hidden="true"></i>
+          </div>
+          <div class="anomaly-num">46%</div>
+          <h3>Aplikasi &amp; Website OPD Dikelola di Server Vendor Luar</h3>
+          <p>
+            Hampir separuh sistem digital perangkat daerah—termasuk unit vital seperti Bapenda dan Pemerintah Desa—masih
+            menggunakan infrastruktur hosting pihak ketiga di luar pusat data terpusat Diskominfo. Kondisi ini memicu
+            risiko penyusupan konten negatif, hilangnya kontrol keamanan perimeter (skor Firewall/IDS-IPS <strong>0</strong>),
+            serta terputusnya integrasi dengan Portal Utama <em>landakkab.go.id</em>.
+          </p>
+          <div class="split-bar-container">
+            <div class="split-bar-track" aria-label="Proporsi hosting aplikasi: 46% di vendor luar, 54% terpusat di infrastruktur daerah">
+              <div class="split-bar-danger" style="width: 46%;"></div>
+              <div class="split-bar-ok" style="width: 54%;"></div>
+            </div>
+            <div class="split-bar-legend">
+              <span>46% Server Pihak Ketiga / Vendor</span>
+              <span>54% Server Diskominfo</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Anomaly 2: Bandwidth Disparity -->
+        <article class="anomaly-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span class="badge badge-k3">Disparitas Konektivitas 38,8×</span>
+            <i data-lucide="wifi-off" width="20" height="20" style="color: var(--k3);" aria-hidden="true"></i>
+          </div>
+          <div class="anomaly-num">0,35 <span style="font-size: 1rem; color: var(--ink-muted);">vs 13,58 Mbps</span></div>
+          <h3>Ketimpangan Ekstrem Bandwidth Internet Antar-OPD</h3>
+          <p>
+            Dari 111 titik jaringan pada 30 OPD, rata-rata kapasitas daerah mencapai <strong>3,20 Mbps/pegawai</strong>.
+            Namun terjadi ketimpangan mencolok: BPBD (<strong>0,35 Mbps/pegawai</strong>) dan Satpol PP (<strong>0,38 Mbps</strong>)
+            tertinggal sangat jauh di belakang Sekretariat DPRD (<strong>13,58 Mbps</strong>) dan Inspektorat (<strong>10,42 Mbps</strong>),
+            sementara jaringan intra-pemerintah baru terhubung penuh di 2 titik (Diskominfo &amp; PTSP).
+          </p>
+          <div class="bandwidth-chart-wrap" style="margin-block-start: auto;">
+            <canvas id="bandwidthChart" aria-label="Perbandingan rasio bandwidth per pegawai antar perangkat daerah"></canvas>
+          </div>
+        </article>
+
+        <!-- Anomaly 3: Web Admin Crisis -->
+        <article class="anomaly-card is-warning">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span class="badge badge-k2">Krisis SDM Pengelola</span>
+            <i data-lucide="user-x" width="20" height="20" style="color: var(--k2);" aria-hidden="true"></i>
+          </div>
+          <div class="anomaly-num">45%</div>
+          <h3>Kekosongan Admin Pengelola Website Profil Dinas</h3>
+          <p>
+            Pendataan terhadap 37 unit kerja (28 PD, 7 Bagian Setda, dan 2 UPT) menunjukkan <strong>17 unit kerja (45%)</strong>
+            tidak memiliki admin pengelola aktif, diperburuk oleh <strong>49%</strong> ketidakpastian status pengelola akibat
+            mutasi ASN tanpa serah terima akun/kata sandi. Akibatnya, kanal informasi publik stagnan, domain mengalami
+            <em>suspend</em>, dan unit daerah tertinggal gagal mengejar transformasi layanan.
+          </p>
+          <div class="split-bar-container">
+            <div class="split-bar-track" aria-label="Status administrator website: 45% kosong, 55% terisi">
+              <div class="split-bar-danger" style="width: 45%;"></div>
+              <div class="split-bar-ok" style="width: 55%;"></div>
+            </div>
+            <div class="split-bar-legend">
+              <span>17 Unit (45%) Kekosongan Admin</span>
+              <span>20 Unit (55%) Memiliki Pengelola</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION 5: REKOMENDASI KEBIJAKAN KONKRET PIMPINAN DAERAH -->
+    <section id="kebijakan" aria-labelledby="heading-kebijakan">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Bagian 05 · Agenda Keputusan Eksekutif (Bupati &amp; Sekda)</div>
+          <h2 id="heading-kebijakan">Empat Kebijakan Strategis Percepatan Indeks SPBE 2026–2028</h2>
+        </div>
+        <p class="section-note">
+          Intervensi prioritas utama (P1) untuk menaikkan Indeks SPBE dari 2,49 (Kurang) menuju target minimal Cukup/Baik secara terukur.
+        </p>
+      </div>
+
+      <div class="policy-grid">
+        <!-- Policy 1 -->
+        <article class="policy-card">
+          <div class="policy-header">
+            <span class="policy-index">Arahan Kebijakan 01 · Pengendalian Belanja &amp; Aplikasi</span>
+            <span class="badge badge-k3">Prioritas P1 · Mendesak</span>
+          </div>
+          <h3>Pemberlakuan Mandatory <em>IT Clearance</em> Terpusat</h3>
+          <p>
+            Mewajibkan seluruh OPD memperoleh persetujuan teknis (<em>IT Clearance</em>) dari Dinas Kominfo sebelum
+            mengajukan anggaran pengadaan aplikasi baru, sewa server vendor, maupun pengembangan sistem informasi dalam
+            RKA/RKPD. Langkah ini menghentikan duplikasi aplikasi sektoral (D4 terendah <strong>2,21</strong>) serta
+            mengarahkan belanja ke layanan bersama (<em>shared services</em>) dan SPLP.
+          </p>
+          <div class="policy-meta-grid">
+            <div>
+              <div class="policy-meta-label">Aktor Kunci</div>
+              <div class="policy-meta-val">Sekda, Diskominfo, Bappeda, BKAD</div>
+            </div>
+            <div>
+              <div class="policy-meta-label">Keluaran Terukur</div>
+              <div class="policy-meta-val">SOP IT Clearance &amp; Matriks Portofolio Investasi TIK</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Policy 2 -->
+        <article class="policy-card">
+          <div class="policy-header">
+            <span class="policy-index">Arahan Kebijakan 02 · Infrastruktur &amp; Konektivitas</span>
+            <span class="badge badge-k3">Prioritas P1 · Mendesak</span>
+          </div>
+          <h3>Kontrak Payung Bandwidth Terpadu &amp; Jaringan Intra-Pemda</h3>
+          <p>
+            Mengonsolidasikan pengadaan akses internet seluruh OPD ke dalam satu kontrak payung terstandar guna
+            mengefisienkan biaya bandwidth sekaligus menutup disparitas 38,8× pada OPD kritis seperti BPBD (0,35 Mbps)
+            dan Satpol PP (0,38 Mbps) agar memenuhi rasio layak minimal 3,2 Mbps/pegawai, disertai perluasan jaringan
+            intra-pemerintah di luar titik Diskominfo dan PTSP.
+          </p>
+          <div class="policy-meta-grid">
+            <div>
+              <div class="policy-meta-label">Aktor Kunci</div>
+              <div class="policy-meta-val">Diskominfo, Bag. PBJ Setda, BKAD</div>
+            </div>
+            <div>
+              <div class="policy-meta-label">Keluaran Terukur</div>
+              <div class="policy-meta-val">Standar Biaya Konektivitas &amp; Pemerataan Jaringan 31 OPD</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Policy 3 -->
+        <article class="policy-card">
+          <div class="policy-header">
+            <span class="policy-index">Arahan Kebijakan 03 · Kapasitas SDM &amp; Pembinaan Klaster 3</span>
+            <span class="badge badge-k2">Prioritas P1–P2</span>
+          </div>
+          <h3>Penugasan <em>Shared IT Support</em> / <em>Roving Pranata Komputer</em></h3>
+          <p>
+            Membentuk tim pendamping keliling (<em>Roving Pranata Komputer</em>) yang dikoordinasikan Diskominfo untuk
+            membina secara intensif 7 OPD Klaster 3 (terutama Diskumindag, Disbudporapar, Bag. PBJ, dan BRIDA),
+            mewajibkan penerbitan SK resmi Administrator Website di 37 unit kerja guna menutup krisis 45% kekosongan admin,
+            serta mewajibkan berita acara serah terima akses sistem setiap terjadi mutasi ASN.
+          </p>
+          <div class="policy-meta-grid">
+            <div>
+              <div class="policy-meta-label">Aktor Kunci</div>
+              <div class="policy-meta-val">BKPSDM, Diskominfo, Seluruh Kepala OPD</div>
+            </div>
+            <div>
+              <div class="policy-meta-label">Keluaran Terukur</div>
+              <div class="policy-meta-val">SK Tim Roving Prakom &amp; SK Admin Resmi 100% OPD</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Policy 4 -->
+        <article class="policy-card">
+          <div class="policy-header">
+            <span class="policy-index">Arahan Kebijakan 04 · Payung Hukum &amp; Kedaulatan Sistem</span>
+            <span class="badge badge-k3">Prioritas P1 · Mendesak</span>
+          </div>
+          <h3>Pengesahan Raperbup SPBE &amp; Migrasi Hosting ke Pusat Data Pemkab</h3>
+          <p>
+            Segera mengesahkan pembaruan Peraturan Bupati tentang SPBE / Pemerintahan Digital (memperbarui Perbup No. 51
+            Tahun 2019), menetapkan Dokumen Arsitektur dan Peta Jalan SPBE selaras RPJMD 2025–2029 serta Perpres 82/2023,
+            serta mewajibkan migrasi bertahap 46% aplikasi/website yang masih berada di server vendor luar ke pusat data
+            pemerintah daerah yang terlindungi firewall, IDS/IPS, dan audit akses.
+          </p>
+          <div class="policy-meta-grid">
+            <div>
+              <div class="policy-meta-label">Aktor Kunci</div>
+              <div class="policy-meta-val">Bupati, Sekda, Bagian Hukum, Diskominfo</div>
+            </div>
+            <div>
+              <div class="policy-meta-label">Keluaran Terukur</div>
+              <div class="policy-meta-val">Perbup SPBE 2026, Roadmap SPBE &amp; Konsolidasi Hosting</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Native Modal Dialog for OPD Detailed Profile -->
+  <dialog id="opd-detail-dialog" class="opd-dialog" closedby="any" aria-labelledby="dlg-opd-title">
+    <div class="dialog-shell">
+      <div class="dialog-head">
+        <div>
+          <span class="badge" id="dlg-cluster-badge">Klaster 1</span>
+          <h2 id="dlg-opd-title">Nama Perangkat Daerah</h2>
+          <p class="inspector-resp" id="dlg-opd-resp" style="margin: 0;">Responden</p>
+        </div>
+        <form method="dialog">
+          <button type="submit" class="dialog-close-btn" aria-label="Tutup dialog detail OPD" autofocus>
+            <i data-lucide="x" width="18" height="18" aria-hidden="true"></i>
+          </button>
+        </form>
+      </div>
+
+      <div class="dialog-body">
+        <div class="dialog-summary-grid">
+          <div class="dialog-stat">
+            <div class="insp-kv-label">Peringkat Kab.</div>
+            <div class="insp-kv-val" id="dlg-rank">#1</div>
+          </div>
+          <div class="dialog-stat">
+            <div class="insp-kv-label">Indeks Tertimbang</div>
+            <div class="insp-kv-val" id="dlg-score">3,28</div>
+          </div>
+          <div class="dialog-stat">
+            <div class="insp-kv-label">Selisih vs Kab. (2,49)</div>
+            <div class="insp-kv-val" id="dlg-delta">+0,79</div>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="panel-title-sm" style="margin-block-end: 0.65rem;">Rincian Skor 6 Domain (Skala 0,00 – 4,00)</h3>
+          <div class="dialog-domain-list" id="dlg-domain-list"></div>
+        </div>
+
+        <div class="dialog-advice" id="dlg-advice"></div>
+      </div>
+
+      <div class="dialog-foot">
+        <form method="dialog">
+          <button type="submit" class="btn btn-outline">Tutup</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <footer class="report-footer">
+    <div>
+      <strong>Sumber Data &amp; Metodologi:</strong> Rekapitulasi Evaluasi Kuesioner SPBE Versi 2 (31 Perangkat Daerah Kab. Landak, 2026),
+      <em>Laporan Hasil Asistensi SPBE OPD Kabupaten Landak 2026</em> (Diskominfo Kab. Landak), dan
+      <em>Laporan Asesmen Kesiapan Digital Kabupaten Landak Tahun 2026</em> (Direktorat Jenderal Teknologi Pemerintah Digital KOMDIGI).
+    </div>
+    <div>
+      Disiapkan untuk Pengambilan Keputusan Eksekutif Pimpinan Daerah Kabupaten Landak.
+    </div>
+  </footer>
+
+  <script>
+    function getToken(name) {
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+
+    // Verified 30 OPD records from rekapitulasi_skor_30_opd_landak.csv with weighted V2 calculation:
+    // Weighted Index = 0.15*D1 + 0.20*D2 + 0.20*D3 + 0.15*D4 + 0.15*D5 + 0.15*D6
+    // Note: No. Urut Asli 25 is absent from the CSV attachment; Diskumindag is positioned at official rank 31.
+    const opdData = [
+      { id: `opd-23`, rank: 1, origNo: 23, name: `Dinas Pendidikan Kabupaten Landak`, resp: `Thedriana Riri`, role: `Jf. Pranata Komputer Ahli Pertama`, d1: 3.50, d2: 3.30, d3: 3.30, d4: 3.20, d5: 3.44, d6: 2.90, weighted: 3.28, cluster: `K1`, clusterLabel: `Klaster 1: Maju` },
+      { id: `opd-27`, rank: 2, origNo: 27, name: `Dinas Komunikasi dan Informatika`, resp: `Irna Rafidah`, role: `Pranata Komputer Ahli Pertama`, d1: 3.30, d2: 2.90, d3: 3.20, d4: 1.80, d5: 3.40, d6: 3.00, weighted: 2.95, cluster: `K1`, clusterLabel: `Klaster 1: Maju` },
+      { id: `opd-24`, rank: 3, origNo: 24, name: `Badan Pajak dan Retribusi Daerah`, resp: `Martinus Alfred`, role: `Kasubbid Pengembangan dan Sistem Informasi`, d1: 3.00, d2: 3.10, d3: 3.00, d4: 2.80, d5: 3.00, d6: 2.60, weighted: 2.93, cluster: `K1`, clusterLabel: `Klaster 1: Maju` },
+      { id: `opd-20`, rank: 4, origNo: 20, name: `Dinas Kesehatan, PPKB / Puskesmas Ngabang`, resp: `Eliskawati`, role: `Perawat Penyelia (Kasubag TU)`, d1: 3.20, d2: 3.00, d3: 2.80, d4: 3.00, d5: 2.40, d6: 2.70, weighted: 2.86, cluster: `K1`, clusterLabel: `Klaster 1: Maju` },
+      { id: `opd-30`, rank: 5, origNo: 30, name: `Sekretariat Daerah Kabupaten Landak`, resp: `Devi Kartika Sari`, role: `Penata Keprotokolan`, d1: 3.00, d2: 2.30, d3: 3.60, d4: 2.70, d5: 2.50, d6: 2.90, weighted: 2.85, cluster: `K1`, clusterLabel: `Klaster 1: Maju` },
+      { id: `opd-16`, rank: 6, origNo: 16, name: `Dinas Penanaman Modal dan PTSP`, resp: `Govetro Eko Cahyono, S.Kom`, role: `Kasubbag Perencanaan, Keuangan dan Pelaporan`, d1: 2.70, d2: 2.90, d3: 3.00, d4: 2.60, d5: 3.10, d6: 2.50, weighted: 2.82, cluster: `K1`, clusterLabel: `Klaster 1: Maju` },
+      { id: `opd-1`, rank: 7, origNo: 1, name: `Dinas PUPR dan Perumahan Rakyat`, resp: `Yoelretno Putra Kadua`, role: `Pranata Komputer`, d1: 3.10, d2: 2.90, d3: 3.00, d4: 2.80, d5: 2.40, d6: 2.50, weighted: 2.80, cluster: `K1`, clusterLabel: `Klaster 1: Maju` },
+      { id: `opd-8`, rank: 8, origNo: 8, name: `Badan Keuangan dan Aset Daerah (BKAD)`, resp: `Christina Hutahaean`, role: `JF ASDMA Ahli Pertama`, d1: 3.60, d2: 3.00, d3: 3.20, d4: 1.80, d5: 2.33, d6: 2.40, weighted: 2.76, cluster: `K1`, clusterLabel: `Klaster 1: Maju` },
+      { id: `opd-22`, rank: 9, origNo: 22, name: `Inspektorat Kabupaten Landak`, resp: `Zaki Sarjudin`, role: `Pranata Komputer Ahli Pertama`, d1: 2.70, d2: 2.50, d3: 3.50, d4: 2.60, d5: 2.22, d6: 2.50, weighted: 2.70, cluster: `K1`, clusterLabel: `Klaster 1: Maju` },
+      { id: `opd-14`, rank: 10, origNo: 14, name: `Dinas Kependudukan dan Pencatatan Sipil`, resp: `Laudy Van Cliff Manurung`, role: `Penata Layanan Operasional`, d1: 3.00, d2: 3.30, d3: 2.70, d4: 1.80, d5: 2.78, d6: 2.40, weighted: 2.70, cluster: `K1`, clusterLabel: `Klaster 1: Maju` },
+      { id: `opd-3`, rank: 11, origNo: 3, name: `Badan Perencanaan Pembangunan Daerah (Bappeda)`, resp: `Yohanes Rahmad`, role: `Sekretaris`, d1: 3.00, d2: 3.10, d3: 2.90, d4: 2.50, d5: 2.30, d6: 2.00, weighted: 2.67, cluster: `K1`, clusterLabel: `Klaster 1: Maju` },
+      { id: `opd-10`, rank: 12, origNo: 10, name: `RSUD Landak`, resp: `Supriyatno, S.Kom.`, role: `Pranata Komputer Ahli Pertama`, d1: 2.20, d2: 2.20, d3: 2.80, d4: 2.20, d5: 2.67, d6: 2.60, weighted: 2.45, cluster: `K2`, clusterLabel: `Klaster 2: Berkembang` },
+      { id: `opd-7`, rank: 13, origNo: 7, name: `BKPSDM Kabupaten Landak`, resp: `Agnes Ega Mariska`, role: `Analis Kebijakan Ahli Pertama`, d1: 3.30, d2: 2.00, d3: 2.80, d4: 1.90, d5: 2.78, d6: 1.90, weighted: 2.44, cluster: `K2`, clusterLabel: `Klaster 2: Berkembang` },
+      { id: `opd-21`, rank: 14, origNo: 21, name: `Dinas Kearsipan dan Perpustakaan`, resp: `Dedyk Apriana, A.Md.T`, role: `Pengelola Layanan Operasional`, d1: 2.70, d2: 3.30, d3: 2.30, d4: 2.00, d5: 2.22, d6: 1.70, weighted: 2.41, cluster: `K2`, clusterLabel: `Klaster 2: Berkembang` },
+      { id: `opd-4`, rank: 15, origNo: 4, name: `Badan Kesatuan Bangsa dan Politik`, resp: `Cavlin Ivan Wiryawan, S.Kom`, role: `JF. Pranata Komputer Ahli Pertama`, d1: 2.50, d2: 1.70, d3: 2.90, d4: 2.30, d5: 2.40, d6: 2.50, weighted: 2.38, cluster: `K2`, clusterLabel: `Klaster 2: Berkembang` },
+      { id: `opd-9`, rank: 16, origNo: 9, name: `Dinas Sosial, P3A Kabupaten Landak`, resp: `Rara Kinasih`, role: `JF Pranata Komputer Ahli Pertama`, d1: 2.60, d2: 2.60, d3: 2.90, d4: 1.90, d5: 2.10, d6: 1.70, weighted: 2.35, cluster: `K2`, clusterLabel: `Klaster 2: Berkembang` },
+      { id: `opd-17`, rank: 17, origNo: 17, name: `Badan Penanggulangan Bencana Daerah (BPBD)`, resp: `Arie Pratama, S.Kom`, role: `Pranata Komputer Ahli Pertama`, d1: 2.20, d2: 2.80, d3: 2.30, d4: 2.60, d5: 2.00, d6: 2.00, weighted: 2.34, cluster: `K2`, clusterLabel: `Klaster 2: Berkembang` },
+      { id: `opd-28`, rank: 18, origNo: 28, name: `Satuan Polisi Pamong Praja`, resp: `Yulita Yuniati Damayana, SE`, role: `Kasubbag Umum dan Kepegawaian`, d1: 3.00, d2: 2.80, d3: 2.10, d4: 1.70, d5: 2.11, d6: 2.10, weighted: 2.32, cluster: `K2`, clusterLabel: `Klaster 2: Berkembang` },
+      { id: `opd-29`, rank: 19, origNo: 29, name: `Dinas Perindustrian dan Tenaga Kerja`, resp: `Yudi Suhendra`, role: `Pengantar Kerja Ahli Pertama`, d1: 3.00, d2: 2.00, d3: 2.80, d4: 1.90, d5: 2.22, d6: 1.80, weighted: 2.30, cluster: `K2`, clusterLabel: `Klaster 2: Berkembang` },
+      { id: `opd-6`, rank: 20, origNo: 6, name: `Dinas Perkebunan dan Peternakan`, resp: `Selpanus Roni, S.Kom`, role: `Pranata Komputer Ahli Pertama`, d1: 2.20, d2: 2.50, d3: 2.00, d4: 2.50, d5: 1.89, d6: 2.70, weighted: 2.29, cluster: `K2`, clusterLabel: `Klaster 2: Berkembang` },
+      { id: `opd-13`, rank: 21, origNo: 13, name: `Dinas Lingkungan Hidup Kabupaten Landak`, resp: `Nella Yuliarni, S.Kom`, role: `Analis SDM Aparatur Ahli Pertama`, d1: 2.60, d2: 2.20, d3: 1.90, d4: 2.20, d5: 2.22, d6: 2.50, weighted: 2.25, cluster: `K2`, clusterLabel: `Klaster 2: Berkembang` },
+      { id: `opd-5`, rank: 22, origNo: 5, name: `Dinas Pemberdayaan Masyarakat dan Desa`, resp: `Adrian Mulyawan, S.Kom`, role: `Pranata Komputer Ahli Pertama`, d1: 2.60, d2: 2.20, d3: 2.00, d4: 2.50, d5: 2.00, d6: 2.10, weighted: 2.22, cluster: `K2`, clusterLabel: `Klaster 2: Berkembang` },
+      { id: `opd-11`, rank: 23, origNo: 11, name: `Dinas Ketahanan Pangan dan Pertanian`, resp: `Ya' Alfiansyah`, role: `Penata Layanan Operasional`, d1: 2.90, d2: 2.10, d3: 2.00, d4: 1.80, d5: 1.80, d6: 2.30, weighted: 2.14, cluster: `K3`, clusterLabel: `Klaster 3: Prioritas Pembinaan` },
+      { id: `opd-19`, rank: 24, origNo: 19, name: `Dinas Perhubungan Kabupaten Landak`, resp: `Pricillia Kusumaningtias A. R.`, role: `Arsiparis Terampil`, d1: 2.50, d2: 2.30, d3: 2.00, d4: 1.70, d5: 1.90, d6: 2.20, weighted: 2.11, cluster: `K3`, clusterLabel: `Klaster 3: Prioritas Pembinaan` },
+      { id: `opd-2`, rank: 25, origNo: 2, name: `Kantor Kecamatan Ngabang`, resp: `Fransiska Evilia Susanti, S.M`, role: `Kasubbag Umum Kepegawaian dan Aset`, d1: 3.00, d2: 1.90, d3: 2.00, d4: 1.60, d5: 2.10, d6: 2.00, weighted: 2.09, cluster: `K3`, clusterLabel: `Klaster 3: Prioritas Pembinaan` },
+      { id: `opd-15`, rank: 26, origNo: 15, name: `Badan Riset dan Inovasi Daerah (BRIDA)`, resp: `Kristi Andriana, S.Sos`, role: `Analis Kebijakan Ahli Pertama`, d1: 2.00, d2: 1.90, d3: 2.00, d4: 2.00, d5: 2.00, d6: 1.70, weighted: 1.94, cluster: `K3`, clusterLabel: `Klaster 3: Prioritas Pembinaan` },
+      { id: `opd-12`, rank: 27, origNo: 12, name: `Sekretariat DPRD Kabupaten Landak`, resp: `Joshua Edward`, role: `Pranata Komputer Ahli Pertama`, d1: 2.60, d2: 1.50, d3: 1.70, d4: 1.60, d5: 2.33, d6: 2.00, weighted: 1.92, cluster: `K3`, clusterLabel: `Klaster 3: Prioritas Pembinaan` },
+      { id: `opd-31`, rank: 28, origNo: 31, name: `Dinas Kebudayaan, Pemuda, Olahraga & Pariwisata`, resp: `Ariani Wulandari`, role: `Perencana Ahli Pertama`, d1: 1.90, d2: 2.40, d3: 1.80, d4: 1.80, d5: 1.33, d6: 1.90, weighted: 1.88, cluster: `K3`, clusterLabel: `Klaster 3: Prioritas Pembinaan` },
+      { id: `opd-18`, rank: 29, origNo: 18, name: `Sekretariat Daerah (Bagian Pengadaan Barang & Jasa)`, resp: `Kurnia Witri Siregar`, role: `Pranata Komputer Ahli Pertama`, d1: 1.80, d2: 1.50, d3: 1.40, d4: 2.60, d5: 2.11, d6: 2.00, weighted: 1.86, cluster: `K3`, clusterLabel: `Klaster 3: Prioritas Pembinaan` },
+      { id: `opd-26`, rank: 31, origNo: 26, name: `Dinas Koperasi, UKM dan Perdagangan (Diskumindag)`, resp: `Viktorianus Dely`, role: `Pemula - Pengamat Tera`, d1: 2.40, d2: 2.00, d3: 1.30, d4: 2.10, d5: 1.50, d6: 1.70, weighted: 1.81, cluster: `K3`, clusterLabel: `Klaster 3: Prioritas Pembinaan` }
+    ];
+
+    const countyDomainAvg = [2.78, 2.45, 2.50, 2.21, 2.29, 2.29];
+    const collator = new Intl.Collator(`id`, { numeric: true, sensitivity: `base` });
+
+    let state = {
+      cluster: `ALL`,
+      search: ``,
+      predikat: `ALL`,
+      sortKey: `rank`,
+      sortDir: `ascending`,
+      selectedOpdId: `opd-23`,
+      compareOpdId: `NONE`
+    };
+
+    let rankingChartInstance = null;
+    let radarChartInstance = null;
+    let bandwidthChartInstance = null;
+    let clusterDonutInstance = null;
+
+    function fmtNum(val) {
+      return val.toFixed(2).replace(`.`, `,`);
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll(`&`, `&amp;`)
+        .replaceAll(`<`, `&lt;`)
+        .replaceAll(`>`, `&gt;`)
+        .replaceAll(`"`, `&quot;`)
+        .replaceAll(`'`, `&#39;`);
+    }
+
+    function getPredikat(score) {
+      if (score >= 3.00) return `Baik`;
+      if (score >= 2.50) return `Cukup`;
+      return `Kurang`;
+    }
+
+    function getPredikatBadgeClass(predikat) {
+      if (predikat === `Baik`) return `badge-k1`;
+      if (predikat === `Cukup`) return `badge-k2`;
+      return `badge-k3`;
+    }
+
+    function getClusterBadgeClass(cluster) {
+      if (cluster === `K1`) return `badge-k1`;
+      if (cluster === `K2`) return `badge-k2`;
+      return `badge-k3`;
+    }
+
+    function getHeatClass(val) {
+      if (val >= 3.00) return `heat-good`;
+      if (val >= 2.50) return `heat-fair`;
+      return `heat-poor`;
+    }
+
+    function matchesFilter(item) {
+      const q = state.search.trim().toLowerCase();
+      if (state.cluster !== `ALL` && item.cluster !== state.cluster) return false;
+      if (state.predikat !== `ALL` && getPredikat(item.weighted) !== state.predikat) return false;
+      if (q && !item.name.toLowerCase().includes(q) && !item.resp.toLowerCase().includes(q)) return false;
+      return true;
+    }
+
+    function getFilteredData() {
+      return opdData.filter(matchesFilter);
+    }
+
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: `smooth`, block: `start` });
+    }
+
+    function setClusterFilter(cluster) {
+      state.cluster = cluster;
+      syncClusterButtons();
+      updateAllViews();
+    }
+
+    function toggleClusterFromCard(cluster) {
+      state.cluster = state.cluster === cluster ? `ALL` : cluster;
+      syncClusterButtons();
+      updateAllViews();
+      scrollToSection(`visualisasi-data`);
+    }
+
+    function setSearchQuery(val) {
+      state.search = val;
+      updateAllViews();
+    }
+
+    function setPredicateFilter(val) {
+      state.predikat = val;
+      updateAllViews();
+    }
+
+    function setCompareOpd(val) {
+      state.compareOpdId = val;
+      renderRadarChart();
+    }
+
+    function resetAllFilters() {
+      state.cluster = `ALL`;
+      state.search = ``;
+      state.predikat = `ALL`;
+      const searchEl = document.getElementById(`search-opd`);
+      if (searchEl) searchEl.value = ``;
+      const predEl = document.getElementById(`filter-predikat`);
+      if (predEl) predEl.value = `ALL`;
+      syncClusterButtons();
+      updateAllViews();
+    }
+
+    function syncClusterButtons() {
+      document.querySelectorAll(`.btn-filter[data-cluster]`).forEach(function(btn) {
+        btn.classList.toggle(`is-active`, btn.dataset.cluster === state.cluster);
+      });
+
+      const cardMap = { K1: `kpi-k1`, K2: `kpi-k2`, K3: `kpi-k3` };
+      Object.keys(cardMap).forEach(function(k) {
+        const card = document.getElementById(cardMap[k]);
+        if (card) card.classList.toggle(`is-active-cluster`, state.cluster === k);
+      });
+    }
+
+    function selectOpdById(opdId) {
+      state.selectedOpdId = opdId;
+      const selectEl = document.getElementById(`radar-opd-select`);
+      if (selectEl) selectEl.value = opdId;
+      renderRadarChart();
+      renderInspector();
+      renderRankingChart();
+      syncTableSelection();
+    }
+
+    function populateRadarSelects() {
+      const primaryEl = document.getElementById(`radar-opd-select`);
+      const compareEl = document.getElementById(`radar-compare-select`);
+      if (primaryEl) {
+        primaryEl.innerHTML = opdData.map(function(d) {
+          return `<option value="${d.id}">#${d.rank} — ${escapeHtml(d.name)} (${fmtNum(d.weighted)})</option>`;
+        }).join(``);
+        primaryEl.value = state.selectedOpdId;
+      }
+      if (compareEl) {
+        compareEl.innerHTML = `<option value="NONE">Hanya Rata-rata Kab. Landak</option>` + opdData.map(function(d) {
+          return `<option value="${d.id}">#${d.rank} — ${escapeHtml(d.name)} (${fmtNum(d.weighted)})</option>`;
+        }).join(``);
+        compareEl.value = state.compareOpdId;
+      }
+    }
+
+    // Build initial semantic table rows once so sorting preserves DOM row identity
+    function buildTableRowsOnce() {
+      const tbody = document.getElementById(`spbe-table-body`);
+      if (!tbody) return;
+
+      const rowsHtml = opdData.map(function(d) {
+        const pred = getPredikat(d.weighted);
+        return `<tr data-id="${d.id}" onclick="selectOpdById('${d.id}')">
+          <td class="rank-cell" data-value="${d.rank}">#${d.rank}</td>
+          <td data-value="${escapeHtml(d.name)}">
+            <div class="opd-cell-name">${escapeHtml(d.name)}</div>
+            <div class="opd-cell-sub">${escapeHtml(d.resp)} · ${escapeHtml(d.role)}</div>
+          </td>
+          <td class="num" data-value="${d.d1}"><span class="heat-pill ${getHeatClass(d.d1)}">${fmtNum(d.d1)}</span></td>
+          <td class="num" data-value="${d.d2}"><span class="heat-pill ${getHeatClass(d.d2)}">${fmtNum(d.d2)}</span></td>
+          <td class="num" data-value="${d.d3}"><span class="heat-pill ${getHeatClass(d.d3)}">${fmtNum(d.d3)}</span></td>
+          <td class="num" data-value="${d.d4}"><span class="heat-pill ${getHeatClass(d.d4)}">${fmtNum(d.d4)}</span></td>
+          <td class="num" data-value="${d.d5}"><span class="heat-pill ${getHeatClass(d.d5)}">${fmtNum(d.d5)}</span></td>
+          <td class="num" data-value="${d.d6}"><span class="heat-pill ${getHeatClass(d.d6)}">${fmtNum(d.d6)}</span></td>
+          <td class="num score-strong" data-value="${d.weighted}">${fmtNum(d.weighted)}</td>
+          <td><span class="badge ${getPredikatBadgeClass(pred)}">${pred}</span></td>
+          <td><span class="badge ${getClusterBadgeClass(d.cluster)}">${escapeHtml(d.clusterLabel)}</span></td>
+          <td style="text-align: center;">
+            <button type="button" class="row-detail-btn" onclick="event.stopPropagation(); selectOpdById('${d.id}'); openOpdDialog('${d.id}');">Detail</button>
+          </td>
+        </tr>`;
+      }).join(``);
+
+      const placeholderHtml = `<tr class="is-placeholder-row" id="row-placeholder-31">
+        <td class="rank-cell" data-value="999">30*</td>
+        <td data-value="zzz">
+          <div class="opd-cell-name" style="color: var(--ink-secondary);">Unit Kerja Ke-31 Definitif (No. Urut 25 pada Rekap V2)</div>
+          <div class="opd-cell-sub">Tercatat pada rekapitulasi agregat 31 OPD (2,49), belum terinci pada lampiran ekspor CSV 30 OPD.</div>
+        </td>
+        <td class="num" data-value="-1">—</td>
+        <td class="num" data-value="-1">—</td>
+        <td class="num" data-value="-1">—</td>
+        <td class="num" data-value="-1">—</td>
+        <td class="num" data-value="-1">—</td>
+        <td class="num" data-value="-1">—</td>
+        <td class="num" data-value="-1">—</td>
+        <td>—</td>
+        <td>Rekonsiliasi V2</td>
+        <td>—</td>
+      </tr>`;
+
+      const emptyRowHtml = `<tr id="row-empty-state" hidden>
+        <td colspan="12" class="empty-state">Tidak ada perangkat daerah yang sesuai dengan filter atau kata kunci pencarian.</td>
+      </tr>`;
+
+      tbody.innerHTML = rowsHtml + placeholderHtml + emptyRowHtml;
+    }
+
+    function syncTableFilterAndSelection() {
+      const tbody = document.getElementById(`spbe-table-body`);
+      const statusText = document.getElementById(`filter-status-text`);
+      if (!tbody) return;
+
+      let visibleCount = 0;
+      const itemMap = new Map(opdData.map(function(d) { return [d.id, d]; }));
+
+      for (const tr of tbody.rows) {
+        if (tr.id === `row-placeholder-31` || tr.id === `row-empty-state`) continue;
+        const item = itemMap.get(tr.dataset.id);
+        const ok = item ? matchesFilter(item) : false;
+        tr.hidden = !ok;
+        tr.classList.toggle(`is-selected-row`, tr.dataset.id === state.selectedOpdId);
+        if (ok) visibleCount += 1;
+      }
+
+      const isUnfiltered = state.cluster === `ALL` && !state.search.trim() && state.predikat === `ALL`;
+      const placeholderRow = document.getElementById(`row-placeholder-31`);
+      const emptyRow = document.getElementById(`row-empty-state`);
+      if (placeholderRow) placeholderRow.hidden = !isUnfiltered;
+      if (emptyRow) emptyRow.hidden = visibleCount > 0;
+
+      if (statusText) {
+        statusText.textContent = isUnfiltered
+          ? `Menampilkan 30 entri terverifikasi (Rekap Definitif 31 OPD)`
+          : `Menampilkan ` + visibleCount + ` OPD sesuai filter`;
+      }
+    }
+
+    function syncTableSelection() {
+      const tbody = document.getElementById(`spbe-table-body`);
+      if (!tbody) return;
+      for (const tr of tbody.rows) {
+        if (tr.dataset.id) {
+          tr.classList.toggle(`is-selected-row`, tr.dataset.id === state.selectedOpdId);
+        }
+      }
+    }
+
+    function reorderRowsInDom(tbody, orderedRows) {
+      const placeholderRow = document.getElementById(`row-placeholder-31`);
+      const emptyRow = document.getElementById(`row-empty-state`);
+      const moveFn = typeof tbody.moveBefore === `function`
+        ? function(row) { tbody.moveBefore(row, null); }
+        : function(row) { tbody.appendChild(row); };
+
+      for (const row of orderedRows) moveFn(row);
+      if (placeholderRow) moveFn(placeholderRow);
+      if (emptyRow) moveFn(emptyRow);
+    }
+
+    function handleTableSort(th) {
+      const table = document.getElementById(`spbe-table`);
+      const tbody = document.getElementById(`spbe-table-body`);
+      const liveStatus = document.getElementById(`table-sort-status`);
+      if (!table || !tbody || !th) return;
+
+      const currentSort = th.getAttribute(`aria-sort`);
+      const type = th.dataset.type || `text`;
+      const defaultDir = (th.dataset.key === `rank` || th.dataset.key === `name`) ? `ascending` : `descending`;
+      const direction = currentSort ? (currentSort === `ascending` ? `descending` : `ascending`) : defaultDir;
+
+      for (const header of table.tHead.rows[0].cells) {
+        header.removeAttribute(`aria-sort`);
+      }
+      th.setAttribute(`aria-sort`, direction);
+
+      state.sortKey = th.dataset.key;
+      state.sortDir = direction;
+
+      const dataRows = [...tbody.rows].filter(function(r) {
+        return r.id !== `row-placeholder-31` && r.id !== `row-empty-state`;
+      });
+      const colIndex = th.cellIndex;
+      const factor = direction === `ascending` ? 1 : -1;
+
+      dataRows.sort(function(a, b) {
+        const va = a.cells[colIndex].dataset.value ?? a.cells[colIndex].textContent.trim();
+        const vb = b.cells[colIndex].dataset.value ?? b.cells[colIndex].textContent.trim();
+        if (type === `number`) {
+          return factor * (parseFloat(va) - parseFloat(vb));
+        }
+        return factor * collator.compare(va, vb);
+      });
+
+      reorderRowsInDom(tbody, dataRows);
+
+      if (liveStatus) {
+        const label = th.textContent.trim();
+        liveStatus.textContent = `Diurutkan berdasarkan ${label}, ${direction === `ascending` ? `naik` : `turun`}, ${dataRows.length} baris`;
+      }
+    }
+
+    function initSortableTableCommands() {
+      const table = document.getElementById(`spbe-table`);
+      if (!table) return;
+
+      if (`commandForElement` in HTMLButtonElement.prototype) {
+        table.addEventListener(`command`, function(event) {
+          if (event.command !== `--sort`) return;
+          const th = event.source.closest(`th`);
+          handleTableSort(th);
+        });
+      } else {
+        table.tHead.querySelectorAll(`button[command="--sort"]`).forEach(function(btn) {
+          btn.addEventListener(`click`, function() {
+            handleTableSort(btn.closest(`th`));
+          });
+        });
+      }
+    }
+
+    // Custom Chart.js plugin for SPBE predicate threshold lines & shaded zones
+    const thresholdPlugin = {
+      id: `spbeThresholds`,
+      beforeDatasetsDraw: function(chart) {
+        const ctx = chart.ctx;
+        const xScale = chart.scales.x;
+        const chartArea = chart.chartArea;
+        if (!xScale || !chartArea) return;
+
+        const x0 = xScale.getPixelForValue(0);
+        const x250 = xScale.getPixelForValue(2.50);
+        const x300 = xScale.getPixelForValue(3.00);
+        const xMax = chartArea.right;
+
+        ctx.save();
+        ctx.fillStyle = getToken(`--band-poor-fill`);
+        ctx.fillRect(x0, chartArea.top, Math.max(0, x250 - x0), chartArea.bottom - chartArea.top);
+
+        ctx.fillStyle = getToken(`--band-fair-fill`);
+        ctx.fillRect(x250, chartArea.top, Math.max(0, x300 - x250), chartArea.bottom - chartArea.top);
+
+        ctx.fillStyle = getToken(`--band-good-fill`);
+        ctx.fillRect(x300, chartArea.top, Math.max(0, xMax - x300), chartArea.bottom - chartArea.top);
+        ctx.restore();
+      },
+      afterDatasetsDraw: function(chart) {
+        const ctx = chart.ctx;
+        const xScale = chart.scales.x;
+        const chartArea = chart.chartArea;
+        if (!xScale || !chartArea) return;
+
+        const brand = getToken(`--brand-800`);
+        const k2 = getToken(`--k2`);
+        const k1 = getToken(`--k1`);
+        const fontSans = getToken(`--font-sans`);
+
+        const lines = [
+          { val: 2.49, label: `Rata-rata Kab. (2,49)`, color: brand, dash: [4, 4], yOffset: 12 },
+          { val: 2.50, label: `Ambang Cukup (2,50)`, color: k2, dash: [2, 3], yOffset: 28 },
+          { val: 3.00, label: `Ambang Baik (3,00)`, color: k1, dash: [6, 3], yOffset: 12 }
+        ];
+
+        ctx.save();
+        lines.forEach(function(ln) {
+          const px = xScale.getPixelForValue(ln.val);
+          if (px < chartArea.left || px > chartArea.right) return;
+          ctx.beginPath();
+          ctx.setLineDash(ln.dash);
+          ctx.strokeStyle = ln.color;
+          ctx.lineWidth = 1.5;
+          ctx.moveTo(px, chartArea.top);
+          ctx.lineTo(px, chartArea.bottom);
+          ctx.stroke();
+
+          ctx.setLineDash([]);
+          ctx.fillStyle = ln.color;
+          ctx.font = `600 10px ` + fontSans;
+          ctx.textAlign = ln.val >= 2.9 ? `right` : `left`;
+          const xPad = ln.val >= 2.9 ? -5 : 5;
+          ctx.fillText(ln.label, px + xPad, chartArea.top + ln.yOffset);
+        });
+        ctx.restore();
+      }
+    };
+
+    function renderClusterDonut() {
+      const canvas = document.getElementById(`clusterDonutChart`);
+      if (!canvas) return;
+      if (clusterDonutInstance) clusterDonutInstance.destroy();
+
+      clusterDonutInstance = new Chart(canvas.getContext(`2d`), {
+        type: `doughnut`,
+        data: {
+          labels: [`Klaster 1: Maju`, `Klaster 2: Berkembang`, `Klaster 3: Pembinaan`],
+          datasets: [{
+            data: [11, 13, 7],
+            backgroundColor: [getToken(`--k1`), getToken(`--k2`), getToken(`--k3`)],
+            borderColor: `#ffffff`,
+            borderWidth: 3,
+            hoverOffset: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: `68%`,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(ctx) {
+                  const pct = ((ctx.raw / 31) * 100).toFixed(1).replace(`.`, `,`);
+                  return ctx.label + `: ` + ctx.raw + ` OPD (` + pct + `%)`;
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function renderRankingChart() {
+      const filtered = getFilteredData();
+      const wrap = document.getElementById(`rankingChartWrap`);
+      const emptyMsg = document.getElementById(`ranking-empty-msg`);
+      const canvas = document.getElementById(`rankingChart`);
+      if (!wrap || !emptyMsg || !canvas) return;
+
+      if (filtered.length === 0) {
+        wrap.style.display = `none`;
+        emptyMsg.style.display = `block`;
+        return;
+      }
+      wrap.style.display = `block`;
+      emptyMsg.style.display = `none`;
+
+      const dynamicHeight = Math.max(260, filtered.length * 26 + 80);
+      wrap.style.minHeight = dynamicHeight + `px`;
+      wrap.style.height = dynamicHeight + `px`;
+
+      const colorK1 = getToken(`--k1`);
+      const colorK2 = getToken(`--k2`);
+      const colorK3 = getToken(`--k3`);
+      const colorSelected = getToken(`--brand-600`);
+      const gridColor = getToken(`--border`);
+      const textColor = getToken(`--ink`);
+      const subText = getToken(`--ink-muted`);
+
+      const labels = filtered.map(function(d) {
+        const shortName = d.name.length > 36 ? d.name.slice(0, 35) + `…` : d.name;
+        return `#` + d.rank + ` ` + shortName;
+      });
+      const values = filtered.map(function(d) { return d.weighted; });
+      const bgColors = filtered.map(function(d) {
+        if (d.id === state.selectedOpdId) return colorSelected;
+        if (d.cluster === `K1`) return colorK1;
+        if (d.cluster === `K2`) return colorK2;
+        return colorK3;
+      });
+
+      if (rankingChartInstance) rankingChartInstance.destroy();
+
+      rankingChartInstance = new Chart(canvas.getContext(`2d`), {
+        type: `bar`,
+        data: {
+          labels: labels,
+          datasets: [{
+            label: `Indeks SPBE Tertimbang`,
+            data: values,
+            backgroundColor: bgColors,
+            borderRadius: 6,
+            borderSkipped: false,
+            barPercentage: 0.72,
+            categoryPercentage: 0.85
+          }]
+        },
+        options: {
+          indexAxis: `y`,
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 220 },
+          layout: { padding: { top: 34, right: 16, left: 0, bottom: 0 } },
+          onClick: function(event, elements) {
+            if (elements && elements.length > 0) {
+              const target = filtered[elements[0].index];
+              if (target) selectOpdById(target.id);
+            }
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                title: function(items) {
+                  const item = filtered[items[0].dataIndex];
+                  return `#` + item.rank + ` — ` + item.name;
+                },
+                label: function(ctx) {
+                  const item = filtered[ctx.dataIndex];
+                  return [
+                    `Indeks Tertimbang: ` + fmtNum(item.weighted) + ` (` + getPredikat(item.weighted) + `)`,
+                    `Klaster: ` + item.clusterLabel,
+                    `Klik batang untuk sorot pada Grafik Radar`
+                  ];
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              min: 0,
+              max: 4.0,
+              grid: { color: gridColor },
+              ticks: {
+                stepSize: 0.5,
+                color: subText,
+                callback: function(val) { return val.toFixed(1).replace(`.`, `,`); }
+              }
+            },
+            y: {
+              grid: { display: false },
+              ticks: {
+                color: textColor,
+                font: { size: 11, weight: `600` }
+              }
+            }
+          }
+        },
+        plugins: [thresholdPlugin]
+      });
+    }
+
+    function renderRadarChart() {
+      const canvas = document.getElementById(`radarChart`);
+      if (!canvas) return;
+      const opd = opdData.find(function(d) { return d.id === state.selectedOpdId; }) || opdData[0];
+
+      const brandColor = getToken(`--brand-800`);
+      const seriesColor = opd.cluster === `K1` ? getToken(`--k1`) : (opd.cluster === `K2` ? getToken(`--k2`) : getToken(`--k3`));
+      const compareColor = getToken(`--compare-accent`);
+      const gridColor = getToken(`--border`);
+      const textColor = getToken(`--ink`);
+      const subText = getToken(`--ink-muted`);
+
+      const datasets = [
+        {
+          label: `#` + opd.rank + ` ` + (opd.name.length > 24 ? opd.name.slice(0, 23) + `…` : opd.name),
+          data: [opd.d1, opd.d2, opd.d3, opd.d4, opd.d5, opd.d6],
+          borderColor: seriesColor,
+          backgroundColor: seriesColor + `26`,
+          borderWidth: 2.25,
+          pointBackgroundColor: seriesColor,
+          pointRadius: 3.5
+        },
+        {
+          label: `Rata-rata Kab. Landak (2,49)`,
+          data: countyDomainAvg,
+          borderColor: brandColor,
+          backgroundColor: brandColor + `12`,
+          borderWidth: 1.75,
+          borderDash: [4, 3],
+          pointBackgroundColor: brandColor,
+          pointRadius: 2.5
+        }
+      ];
+
+      if (state.compareOpdId && state.compareOpdId !== `NONE` && state.compareOpdId !== opd.id) {
+        const cmp = opdData.find(function(d) { return d.id === state.compareOpdId; });
+        if (cmp) {
+          datasets.push({
+            label: `#` + cmp.rank + ` ` + (cmp.name.length > 24 ? cmp.name.slice(0, 23) + `…` : cmp.name),
+            data: [cmp.d1, cmp.d2, cmp.d3, cmp.d4, cmp.d5, cmp.d6],
+            borderColor: compareColor,
+            backgroundColor: compareColor + `1F`,
+            borderWidth: 2,
+            pointBackgroundColor: compareColor,
+            pointRadius: 3
+          });
+        }
+      }
+
+      if (radarChartInstance) radarChartInstance.destroy();
+
+      radarChartInstance = new Chart(canvas.getContext(`2d`), {
+        type: `radar`,
+        data: {
+          labels: [
+            `D1 ProsBis (15%)`,
+            `D2 Data (20%)`,
+            `D3 Layanan (20%)`,
+            `D4 Aplikasi (15%)`,
+            `D5 Infra (15%)`,
+            `D6 Keamanan (15%)`
+          ],
+          datasets: datasets
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 220 },
+          plugins: {
+            legend: {
+              position: `bottom`,
+              labels: { color: textColor, boxWidth: 12, font: { size: 11 } }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(ctx) {
+                  return ctx.dataset.label + `: ` + fmtNum(ctx.raw);
+                }
+              }
+            }
+          },
+          scales: {
+            r: {
+              min: 0,
+              max: 4.0,
+              ticks: {
+                stepSize: 1.0,
+                color: subText,
+                backdropColor: `transparent`,
+                font: { size: 10 }
+              },
+              grid: { color: gridColor },
+              angleLines: { color: gridColor },
+              pointLabels: {
+                color: textColor,
+                font: { size: 11, weight: `600` }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function renderInspector() {
+      const opd = opdData.find(function(d) { return d.id === state.selectedOpdId; }) || opdData[0];
+      const nameEl = document.getElementById(`insp-name`);
+      const respEl = document.getElementById(`insp-resp`);
+      const badgeEl = document.getElementById(`insp-cluster-badge`);
+      const rankEl = document.getElementById(`insp-rank`);
+      const scoreEl = document.getElementById(`insp-score`);
+      const predEl = document.getElementById(`insp-predikat`);
+      const gapEl = document.getElementById(`insp-gap-note`);
+
+      if (nameEl) nameEl.textContent = opd.name;
+      if (respEl) respEl.textContent = `Responden: ` + opd.resp + ` — ` + opd.role;
+      if (badgeEl) {
+        badgeEl.textContent = opd.clusterLabel;
+        badgeEl.className = `badge ` + getClusterBadgeClass(opd.cluster);
+      }
+      if (rankEl) rankEl.textContent = `#` + opd.rank;
+      if (scoreEl) scoreEl.textContent = fmtNum(opd.weighted);
+      if (predEl) predEl.textContent = getPredikat(opd.weighted);
+
+      if (gapEl) {
+        const domainPairs = [
+          { label: `Proses Bisnis (D1)`, val: opd.d1 },
+          { label: `Data & Informasi (D2)`, val: opd.d2 },
+          { label: `Layanan SPBE (D3)`, val: opd.d3 },
+          { label: `Aplikasi (D4)`, val: opd.d4 },
+          { label: `Infrastruktur TIK (D5)`, val: opd.d5 },
+          { label: `Keamanan Informasi (D6)`, val: opd.d6 }
+        ].sort(function(a, b) { return b.val - a.val; });
+
+        const deltaCounty = opd.weighted - 2.49;
+        const deltaStr = (deltaCounty >= 0 ? `+` : ``) + fmtNum(deltaCounty);
+        gapEl.innerHTML = `<strong>Domain Terkuat:</strong> ${escapeHtml(domainPairs[0].label)} (${fmtNum(domainPairs[0].val)}) · <strong>Perlu Penguatan:</strong> ${escapeHtml(domainPairs[5].label)} (${fmtNum(domainPairs[5].val)}) · <strong>Selisih vs Kab.:</strong> ${deltaStr}`;
+      }
+    }
+
+    function openOpdDialog(opdId) {
+      const dialog = document.getElementById(`opd-detail-dialog`);
+      const opd = opdData.find(function(d) { return d.id === opdId; }) || opdData[0];
+      if (!dialog || !opd) return;
+
+      document.getElementById(`dlg-opd-title`).textContent = opd.name;
+      document.getElementById(`dlg-opd-resp`).textContent = `Responden: ` + opd.resp + ` — ` + opd.role;
+      const badge = document.getElementById(`dlg-cluster-badge`);
+      badge.textContent = opd.clusterLabel;
+      badge.className = `badge ` + getClusterBadgeClass(opd.cluster);
+
+      document.getElementById(`dlg-rank`).textContent = `#` + opd.rank + ` / 31`;
+      document.getElementById(`dlg-score`).textContent = fmtNum(opd.weighted) + ` (` + getPredikat(opd.weighted) + `)`;
+      const delta = opd.weighted - 2.49;
+      document.getElementById(`dlg-delta`).textContent = (delta >= 0 ? `+` : ``) + fmtNum(delta);
+
+      const domains = [
+        { name: `D1 Proses Bisnis (15%)`, val: opd.d1, avg: countyDomainAvg[0] },
+        { name: `D2 Data & Informasi (20%)`, val: opd.d2, avg: countyDomainAvg[1] },
+        { name: `D3 Layanan SPBE (20%)`, val: opd.d3, avg: countyDomainAvg[2] },
+        { name: `D4 Aplikasi (15%)`, val: opd.d4, avg: countyDomainAvg[3] },
+        { name: `D5 Infrastruktur TIK (15%)`, val: opd.d5, avg: countyDomainAvg[4] },
+        { name: `D6 Keamanan Info (15%)`, val: opd.d6, avg: countyDomainAvg[5] }
+      ];
+
+      document.getElementById(`dlg-domain-list`).innerHTML = domains.map(function(dm) {
+        const pct = Math.min(100, Math.max(0, (dm.val / 4) * 100));
+        const fillColor = dm.val >= 3.0 ? `var(--k1)` : (dm.val >= 2.5 ? `var(--k2)` : `var(--k3)`);
+        const diff = dm.val - dm.avg;
+        const diffLabel = (diff >= 0 ? `+` : ``) + fmtNum(diff);
+        return `<div class="dialog-domain-row">
+          <span style="font-weight: 600; color: var(--ink);">${escapeHtml(dm.name)}</span>
+          <div class="dialog-bar-track">
+            <div class="dialog-bar-fill" style="width: ${pct}%; background: ${fillColor};"></div>
+          </div>
+          <span style="text-align: right; font-variant-numeric: tabular-nums;">
+            <strong>${fmtNum(dm.val)}</strong> <span style="font-size: 0.72rem; color: var(--ink-muted);">(${diffLabel})</span>
+          </span>
+        </div>`;
+      }).join(``);
+
+      const sortedDomains = domains.slice().sort(function(a, b) { return a.val - b.val; });
+      const weakest = sortedDomains[0];
+      let adviceText = ``;
+      if (opd.cluster === `K1`) {
+        adviceText = `<strong>Rekomendasi Klaster 1 (Maju):</strong> Pertahankan sebagai unit percontohan lintas OPD dan prioritaskan penguatan pada <em>${escapeHtml(weakest.name)}</em> (${fmtNum(weakest.val)}) agar menembus predikat Baik menyeluruh melalui kepatuhan <em>IT Clearance</em> dan integrasi data.`;
+      } else if (opd.cluster === `K2`) {
+        adviceText = `<strong>Rekomendasi Klaster 2 (Berkembang):</strong> Fokuskan konsolidasi pada <em>${escapeHtml(weakest.name)}</em> (${fmtNum(weakest.val)}), migrasi hosting ke pusat data Diskominfo, serta dokumentasi siklus aplikasi dan kontrol akses guna melampaui ambang Cukup (2,50).`;
+      } else {
+        adviceText = `<strong>Rekomendasi Klaster 3 (Prioritas Pembinaan):</strong> Jadwalkan pendampingan intensif oleh tim <em>Roving Pranata Komputer</em>, tetapkan SK resmi Admin Pengelola Website, dan benahi <em>${escapeHtml(weakest.name)}</em> (${fmtNum(weakest.val)}) serta konektivitas jaringan dasar.`;
+      }
+      document.getElementById(`dlg-advice`).innerHTML = adviceText;
+
+      dialog.showModal();
+    }
+
+    function initDialogLightDismissFallback() {
+      if (`closedBy` in HTMLDialogElement.prototype) return;
+      document.querySelectorAll(`dialog[closedby="any"]`).forEach(function(dialog) {
+        let pressedOutside = false;
+        const isOutside = function(e) {
+          const r = dialog.getBoundingClientRect();
+          return e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom;
+        };
+        dialog.addEventListener(`pointerdown`, function(e) { pressedOutside = isOutside(e); });
+        dialog.addEventListener(`pointerup`, function(e) { if (pressedOutside && isOutside(e)) dialog.close(); });
+      });
+    }
+
+    function renderBandwidthChart() {
+      const canvas = document.getElementById(`bandwidthChart`);
+      if (!canvas) return;
+
+      const colorHigh = getToken(`--k1`);
+      const colorAvg = getToken(`--brand-800`);
+      const colorLow = getToken(`--k3`);
+      const gridColor = getToken(`--border`);
+      const textColor = getToken(`--ink`);
+      const subText = getToken(`--ink-muted`);
+
+      if (bandwidthChartInstance) bandwidthChartInstance.destroy();
+
+      bandwidthChartInstance = new Chart(canvas.getContext(`2d`), {
+        type: `bar`,
+        data: {
+          labels: [
+            `Sekretariat DPRD`,
+            `Inspektorat`,
+            `Rata-rata Kab. Landak`,
+            `Satpol PP`,
+            `BPBD`
+          ],
+          datasets: [{
+            label: `Mbps per Pegawai`,
+            data: [13.58, 10.42, 3.20, 0.38, 0.35],
+            backgroundColor: [colorHigh, colorHigh, colorAvg, colorLow, colorLow],
+            borderRadius: 6,
+            borderSkipped: false,
+            barPercentage: 0.65
+          }]
+        },
+        options: {
+          indexAxis: `y`,
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 220 },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(ctx) {
+                  return ctx.raw.toFixed(2).replace(`.`, `,`) + ` Mbps / pegawai`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              min: 0,
+              max: 15,
+              grid: { color: gridColor },
+              ticks: {
+                color: subText,
+                font: { size: 10 },
+                callback: function(val) { return val + ` Mbps`; }
+              }
+            },
+            y: {
+              grid: { display: false },
+              ticks: {
+                color: textColor,
+                font: { size: 11, weight: `600` }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function exportCsv() {
+      const filtered = getFilteredData();
+      const headers = [`Peringkat`, `Nama Perangkat Daerah`, `Responden`, `Jabatan`, `D1 ProsBis`, `D2 Data`, `D3 Layanan`, `D4 Aplikasi`, `D5 Infra`, `D6 Keamanan`, `Indeks Tertimbang`, `Predikat`, `Klaster`];
+      const csvCell = function(val) {
+        const s = String(val).replaceAll(`"`, `""`);
+        return `"` + s + `"`;
+      };
+      const lines = [headers.map(csvCell).join(`,`)].concat(
+        filtered.map(function(d) {
+          return [
+            d.rank, d.name, d.resp, d.role,
+            d.d1.toFixed(2), d.d2.toFixed(2), d.d3.toFixed(2), d.d4.toFixed(2), d.d5.toFixed(2), d.d6.toFixed(2),
+            d.weighted.toFixed(2), getPredikat(d.weighted), d.clusterLabel
+          ].map(csvCell).join(`,`);
+        })
+      );
+      const blob = new Blob([`\uFEFF` + lines.join(`\n`)], { type: `text/csv;charset=utf-8;` });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement(`a`);
+      a.href = url;
+      a.download = `rekapitulasi_spbe_landak_2026.csv`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function initStickyNavObserver() {
+      const wrap = document.getElementById(`stickyNavWrap`);
+      if (wrap && !CSS.supports(`container-type: scroll-state`)) {
+        const sentinel = document.createElement(`div`);
+        sentinel.style.cssText = `position: relative; height: 1px; margin-top: -1px; pointer-events: none;`;
+        wrap.parentNode.insertBefore(sentinel, wrap);
+        const io = new IntersectionObserver(function(entries) {
+          wrap.classList.toggle(`is-stuck`, entries[0].intersectionRatio === 0);
+        }, { threshold: [0, 1] });
+        io.observe(sentinel);
+      }
+
+      const links = document.querySelectorAll(`.nav-pill`);
+      const sections = [`ringkasan-eksekutif`, `visualisasi-data`, `tabel-opd`, `temuan-kritis`, `kebijakan`]
+        .map(function(id) { return document.getElementById(id); })
+        .filter(Boolean);
+
+      if (sections.length > 0 && `IntersectionObserver` in window) {
+        const secIo = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              const targetHref = `#` + entry.target.id;
+              links.forEach(function(lnk) {
+                lnk.classList.toggle(`is-current`, lnk.getAttribute(`href`) === targetHref);
+              });
+            }
+          });
+        }, { rootMargin: `-25% 0px -65% 0px` });
+        sections.forEach(function(sec) { secIo.observe(sec); });
+      }
+    }
+
+    function updateAllViews() {
+      renderRankingChart();
+      syncTableFilterAndSelection();
+      renderRadarChart();
+      renderInspector();
+    }
+
+    document.addEventListener(`DOMContentLoaded`, function() {
+      buildTableRowsOnce();
+      initSortableTableCommands();
+      initDialogLightDismissFallback();
+      initStickyNavObserver();
+      populateRadarSelects();
+      renderClusterDonut();
+      updateAllViews();
+      renderBandwidthChart();
+      if (window.lucide && typeof window.lucide.createIcons === `function`) {
+        window.lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>
